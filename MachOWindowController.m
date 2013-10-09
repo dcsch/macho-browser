@@ -37,12 +37,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [simpleListViewController release];
-    [segmentViewController release];
-    [super dealloc];
-}
 
 - (void)awakeFromNib
 {
@@ -68,7 +62,7 @@
 {
     if (arrayController.selectedObjects.count > 0)
     {
-        LoadCommand *loadCommand = [arrayController.selectedObjects objectAtIndex:0];
+        LoadCommand *loadCommand = (arrayController.selectedObjects)[0];
         
         if (loadCommand.dataAvailable)
         {
@@ -121,9 +115,9 @@
 - (void)splitView:(NSSplitView*)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
 	NSRect newFrame = [sender frame]; // get the new size of the whole splitView
-	NSView *left = [[sender subviews] objectAtIndex:0];
+	NSView *left = [sender subviews][0];
 	NSRect leftFrame = [left frame];
-	NSView *right = [[sender subviews] objectAtIndex:1];
+	NSView *right = [sender subviews][1];
 	NSRect rightFrame = [right frame];
     
 	CGFloat dividerThickness = [sender dividerThickness];
@@ -181,7 +175,7 @@
 	NSArray *subViews = [placeHolderView subviews];
 	if ([subViews count] > 0)
 	{
-		[[subViews objectAtIndex:0] removeFromSuperview];
+		[subViews[0] removeFromSuperview];
 	}
     currentView = nil;
 	

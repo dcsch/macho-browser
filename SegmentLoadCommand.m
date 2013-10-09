@@ -46,8 +46,7 @@
             }
 
             strncpy(buf, c->segname, 16);
-            segName = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
-            [segName retain];
+            segName = @(buf);
             
             if (c->cmdsize < sizeof(struct segment_command))
             {
@@ -98,7 +97,6 @@
                                                             data:sectionData
                                                        swapBytes:self.swapBytes];
                 [array addObject:section];
-                [section release];
             }
             sections = array;
         }
@@ -115,8 +113,7 @@
             }
             
             strncpy(buf, c->segname, 16);
-            segName = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
-            [segName retain];
+            segName = @(buf);
 
             if (c->cmdsize < sizeof(struct segment_command_64))
             {
@@ -167,7 +164,6 @@
                                                               data:sectionData
                                                          swapBytes:self.swapBytes];
                 [array addObject:section];
-                [section release];
             }
             sections = array;
         }
@@ -175,12 +171,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [segName release];
-    [sections release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark Properties
@@ -192,14 +182,14 @@
     {
         return [NSDictionary dictionaryWithObjectsAndKeys:
                 self.segName, @"segname",
-                [NSNumber numberWithUnsignedInteger:vmaddr], @"vmaddr",
-                [NSNumber numberWithUnsignedInteger:vmsize], @"vmsize",
-                [NSNumber numberWithUnsignedInteger:fileoff], @"fileoff",
-                [NSNumber numberWithUnsignedInteger:filesize], @"filesize",
-                [NSNumber numberWithUnsignedInteger:maxprot], @"maxprot",
-                [NSNumber numberWithUnsignedInteger:initprot], @"initprot",
-                [NSNumber numberWithUnsignedInteger:nsects], @"nsects",
-                [NSNumber numberWithUnsignedInteger:flags], @"flags",
+                @(vmaddr), @"vmaddr",
+                @(vmsize), @"vmsize",
+                @(fileoff), @"fileoff",
+                @(filesize), @"filesize",
+                @(maxprot), @"maxprot",
+                @(initprot), @"initprot",
+                @(nsects), @"nsects",
+                @(flags), @"flags",
                 nil, nil];
     }
     return [super dictionary];

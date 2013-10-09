@@ -39,9 +39,7 @@
             desc = symbolEntry->n_desc;
             value = symbolEntry->n_value;
         }
-        name = [NSString stringWithCString:stringTable + strx
-                                  encoding:NSASCIIStringEncoding];
-        [name retain];
+        name = @(stringTable + strx);
     }
     return self;
 }
@@ -68,17 +66,10 @@
             desc = symbolEntry->n_desc;
             value = symbolEntry->n_value;
         }
-        name = [NSString stringWithCString:stringTable + strx
-                                  encoding:NSASCIIStringEncoding];
-        [name retain];
+        name = @(stringTable + strx);
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [name release];
-    [super dealloc];
-}
 
 @end

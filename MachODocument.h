@@ -14,6 +14,6 @@
     NSArray *machObjects;
 }
 
-@property(retain, readonly) NSArray *machObjects;
+@property(strong, readonly) NSArray *machObjects;
 
 @end

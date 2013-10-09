@@ -19,7 +19,6 @@
     if (self)
     {
         data = objectData;
-        [data retain];
         
         uint32_t m = self.magic;
         if (m == MH_CIGAM || m == MH_CIGAM_64)
@@ -28,7 +27,7 @@
             swapBytes = NO;
         
         // Scan through all the load commands
-        NSMutableArray *commands = [[NSMutableArray array] retain];
+        NSMutableArray *commands = [NSMutableArray array];
         NSUInteger offset;
         if (m == MH_MAGIC_64 || m == MH_CIGAM_64)
             offset = sizeof(struct mach_header_64);
@@ -45,19 +44,12 @@
             
             offset += loadCommand.commandSize;
             sizeofcmds -= loadCommand.commandSize;
-            [loadCommand release];
         }
         loadCommands = commands;
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [loadCommands release];
-    [data release];
-    [super dealloc];
-}
 
 - (NSString *)description
 {

@@ -36,7 +36,7 @@
 @property(readonly) NSUInteger flags;
 @property(readonly) NSUInteger reserved1;
 @property(readonly) NSUInteger reserved2;
-@property(retain, readonly) NSData *data;
+@property(strong, readonly) NSData *data;
 @property(copy, readonly) NSString *hexDump;
 
 - (id)initWithSect:(struct section*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes;

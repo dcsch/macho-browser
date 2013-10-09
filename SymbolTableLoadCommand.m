@@ -54,18 +54,12 @@
                                              swapBytes:self.swapBytes];
             }
             [array addObject:symbol];
-            [symbol release];
         }
         symbols = array;
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [symbols release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark Properties

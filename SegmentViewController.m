@@ -18,13 +18,13 @@
     // Set the various formatters for data fields
     HexFormatter *hexFormatter = [[HexFormatter alloc] init];
     AlignmentFormatter *alignmentFormatter = [[AlignmentFormatter alloc] init];
-    NSTableColumn *column = [tableView.tableColumns objectAtIndex:2];
+    NSTableColumn *column = (tableView.tableColumns)[2];
     [column.dataCell setFormatter:hexFormatter];
-    column = [tableView.tableColumns objectAtIndex:3];
+    column = (tableView.tableColumns)[3];
     [column.dataCell setFormatter:hexFormatter];
-    column = [tableView.tableColumns objectAtIndex:5];
+    column = (tableView.tableColumns)[5];
     [column.dataCell setFormatter:alignmentFormatter];
-    column = [tableView.tableColumns objectAtIndex:8];
+    column = (tableView.tableColumns)[8];
     [column.dataCell setFormatter:hexFormatter];
     
     [vmaddrTextField setFormatter:hexFormatter];
@@ -33,8 +33,6 @@
     [initprotTextField setFormatter:hexFormatter];
     [flagsTextField setFormatter:hexFormatter];
     
-    [hexFormatter release];
-    [alignmentFormatter release];
     
     // Set a fixed-width font for the text dump view
     NSFontManager *fm = [NSFontManager sharedFontManager];
@@ -42,11 +40,11 @@
                                traits:NSFixedPitchFontMask
                                weight:5
                                  size:12.0];
-    column = [dumpTableView.tableColumns objectAtIndex:0];
+    column = (dumpTableView.tableColumns)[0];
     [column.dataCell setFont:font];
-    column = [dumpTableView.tableColumns objectAtIndex:1];
+    column = (dumpTableView.tableColumns)[1];
     [column.dataCell setFont:font];
-    column = [dumpTableView.tableColumns objectAtIndex:2];
+    column = (dumpTableView.tableColumns)[2];
     [column.dataCell setFont:font];
 }
 
@@ -63,7 +61,7 @@
     NSArray *selection = arrayController.selectedObjects;
     if (selection.count > 0)
     {
-        Section *section = [selection objectAtIndex:0];
+        Section *section = selection[0];
         NSLog(@"Select: %@,%@", section.segName, section.sectName);
         
     }
@@ -84,7 +82,7 @@
     NSArray *selection = arrayController.selectedObjects;
     if (selection.count > 0)
     {
-        Section *section = [selection objectAtIndex:0];
+        Section *section = selection[0];
         NSInteger count = section.size / 16;
         if (section.size % 16)
             ++count;
@@ -99,7 +97,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(NSInteger)rowIndex
 {
     NSArray *selection = arrayController.selectedObjects;
-    Section *section = [selection objectAtIndex:0];
+    Section *section = selection[0];
 
     if ([aTableColumn.identifier isEqualToString:@"address"])
     {

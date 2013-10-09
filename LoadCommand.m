@@ -45,12 +45,10 @@ struct local_thread_command {
 
     if (cmd == LC_SEGMENT || cmd == LC_SEGMENT_64)
     {
-        [self release];
         return [[SegmentLoadCommand alloc] initWithData:aData offset:anOffset];
     }
     else if (cmd == LC_SYMTAB)
     {
-        [self release];
         return [[SymbolTableLoadCommand alloc] initWithData:aData offset:anOffset];
     }
     
@@ -206,45 +204,45 @@ struct local_thread_command {
         struct dysymtab_command *c = (struct dysymtab_command *)(data.bytes + offset);
         if (self.swapBytes)
             return [NSDictionary dictionaryWithObjectsAndKeys:
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->ilocalsym)], @"ilocalsym",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nlocalsym)], @"nlocalsym",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->iextdefsym)], @"iextdefsym",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nextdefsym)], @"nextdefsym",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->iundefsym)], @"iundefsym",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nundefsym)], @"nundefsym",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->tocoff)], @"tocoff",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->ntoc)], @"ntoc",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->modtaboff)], @"modtaboff",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nmodtab)], @"nmodtab",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->extrefsymoff)], @"extrefsymoff",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nextrefsyms)], @"nextrefsyms",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->indirectsymoff)], @"indirectsymoff",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nindirectsyms)], @"nindirectsyms",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->extreloff)], @"extreloff",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nextrel)], @"nextrel",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->locreloff)], @"locreloff",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->nlocrel)], @"nlocrel",
+                    @(CFSwapInt32(c->ilocalsym)), @"ilocalsym",
+                    @(CFSwapInt32(c->nlocalsym)), @"nlocalsym",
+                    @(CFSwapInt32(c->iextdefsym)), @"iextdefsym",
+                    @(CFSwapInt32(c->nextdefsym)), @"nextdefsym",
+                    @(CFSwapInt32(c->iundefsym)), @"iundefsym",
+                    @(CFSwapInt32(c->nundefsym)), @"nundefsym",
+                    @(CFSwapInt32(c->tocoff)), @"tocoff",
+                    @(CFSwapInt32(c->ntoc)), @"ntoc",
+                    @(CFSwapInt32(c->modtaboff)), @"modtaboff",
+                    @(CFSwapInt32(c->nmodtab)), @"nmodtab",
+                    @(CFSwapInt32(c->extrefsymoff)), @"extrefsymoff",
+                    @(CFSwapInt32(c->nextrefsyms)), @"nextrefsyms",
+                    @(CFSwapInt32(c->indirectsymoff)), @"indirectsymoff",
+                    @(CFSwapInt32(c->nindirectsyms)), @"nindirectsyms",
+                    @(CFSwapInt32(c->extreloff)), @"extreloff",
+                    @(CFSwapInt32(c->nextrel)), @"nextrel",
+                    @(CFSwapInt32(c->locreloff)), @"locreloff",
+                    @(CFSwapInt32(c->nlocrel)), @"nlocrel",
                     nil, nil];
         else
             return [NSDictionary dictionaryWithObjectsAndKeys:
-                    [NSNumber numberWithUnsignedInteger:c->ilocalsym], @"ilocalsym",
-                    [NSNumber numberWithUnsignedInteger:c->nlocalsym], @"nlocalsym",
-                    [NSNumber numberWithUnsignedInteger:c->iextdefsym], @"iextdefsym",
-                    [NSNumber numberWithUnsignedInteger:c->nextdefsym], @"nextdefsym",
-                    [NSNumber numberWithUnsignedInteger:c->iundefsym], @"iundefsym",
-                    [NSNumber numberWithUnsignedInteger:c->nundefsym], @"nundefsym",
-                    [NSNumber numberWithUnsignedInteger:c->tocoff], @"tocoff",
-                    [NSNumber numberWithUnsignedInteger:c->ntoc], @"ntoc",
-                    [NSNumber numberWithUnsignedInteger:c->modtaboff], @"modtaboff",
-                    [NSNumber numberWithUnsignedInteger:c->nmodtab], @"nmodtab",
-                    [NSNumber numberWithUnsignedInteger:c->extrefsymoff], @"extrefsymoff",
-                    [NSNumber numberWithUnsignedInteger:c->nextrefsyms], @"nextrefsyms",
-                    [NSNumber numberWithUnsignedInteger:c->indirectsymoff], @"indirectsymoff",
-                    [NSNumber numberWithUnsignedInteger:c->nindirectsyms], @"nindirectsyms",
-                    [NSNumber numberWithUnsignedInteger:c->extreloff], @"extreloff",
-                    [NSNumber numberWithUnsignedInteger:c->nextrel], @"nextrel",
-                    [NSNumber numberWithUnsignedInteger:c->locreloff], @"locreloff",
-                    [NSNumber numberWithUnsignedInteger:c->nlocrel], @"nlocrel",
+                    @(c->ilocalsym), @"ilocalsym",
+                    @(c->nlocalsym), @"nlocalsym",
+                    @(c->iextdefsym), @"iextdefsym",
+                    @(c->nextdefsym), @"nextdefsym",
+                    @(c->iundefsym), @"iundefsym",
+                    @(c->nundefsym), @"nundefsym",
+                    @(c->tocoff), @"tocoff",
+                    @(c->ntoc), @"ntoc",
+                    @(c->modtaboff), @"modtaboff",
+                    @(c->nmodtab), @"nmodtab",
+                    @(c->extrefsymoff), @"extrefsymoff",
+                    @(c->nextrefsyms), @"nextrefsyms",
+                    @(c->indirectsymoff), @"indirectsymoff",
+                    @(c->nindirectsyms), @"nindirectsyms",
+                    @(c->extreloff), @"extreloff",
+                    @(c->nextrel), @"nextrel",
+                    @(c->locreloff), @"locreloff",
+                    @(c->nlocrel), @"nlocrel",
                     nil, nil];
     }
     else if (cmd == LC_LOAD_DYLIB
@@ -310,13 +308,13 @@ struct local_thread_command {
         struct local_thread_command *c = (struct local_thread_command *)(data.bytes + offset);
         if (self.swapBytes)
             return [NSDictionary dictionaryWithObjectsAndKeys:
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->flavor)], @"flavor",
-                    [NSNumber numberWithUnsignedInteger:CFSwapInt32(c->count)], @"count",
+                    @(CFSwapInt32(c->flavor)), @"flavor",
+                    @(CFSwapInt32(c->count)), @"count",
                     nil, nil];
         else
             return [NSDictionary dictionaryWithObjectsAndKeys:
-                    [NSNumber numberWithUnsignedInteger:c->flavor], @"flavor",
-                    [NSNumber numberWithUnsignedInteger:c->count], @"count",
+                    @(c->flavor), @"flavor",
+                    @(c->count), @"count",
                     nil, nil];
     }
     return nil;

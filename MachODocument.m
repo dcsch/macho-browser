@@ -24,24 +24,18 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [machObjects release];
-    [super dealloc];
-}
 
 - (void)makeWindowControllers
 {
     MachOWindowController *controller = [[MachOWindowController alloc] init];
     [self addWindowController:controller];
-    [controller release];
 }
 
 - (BOOL)readFromData:(NSData *)data
               ofType:(NSString *)typeName
                error:(NSError **)outError
 {
-    NSMutableArray *objects = [[NSMutableArray array] retain];
+    NSMutableArray *objects = [NSMutableArray array];
     const char *bytes = data.bytes;
     uint32_t magic = *(uint32_t *)bytes;
     struct fat_arch *arch = NULL;
@@ -79,7 +73,6 @@
         {
             MachObject *machObject = [[MachObject alloc] initWithData:objectData];
             [objects addObject:machObject];
-            [machObject release];
         }
 
         if (arch)
@@ -93,7 +86,6 @@
     }
     else
     {
-        [objects release];
         return NO;
     }
 }

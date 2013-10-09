@@ -24,7 +24,7 @@
 
 @property(readonly) uint32_t sizeOfCommands;
 
-@property(retain, readonly) NSArray *loadCommands;
+@property(strong, readonly) NSArray *loadCommands;
 
 - (id)initWithData:(NSData *)objectData;
 

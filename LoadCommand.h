@@ -23,7 +23,7 @@
 
 @property(readonly) uint32_t commandSize;
 
-@property(readonly) NSDictionary *dictionary;
+@property(weak, readonly) NSDictionary *dictionary;
 
 @property(readonly) BOOL swapBytes;
 

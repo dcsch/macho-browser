@@ -32,6 +32,6 @@
 @property(readonly) NSUInteger initprot;
 @property(readonly) NSUInteger nsects;
 @property(readonly) NSUInteger flags;
-@property(retain, readonly) NSArray *sections;
+@property(strong, readonly) NSArray *sections;
 
 @end

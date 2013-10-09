@@ -32,13 +32,11 @@
 
         strncpy(buf, aSect->sectname, 16);
         buf[16] = 0;
-        sectName = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
-        [sectName retain];
+        sectName = @(buf);
 
         strncpy(buf, aSect->segname, 16);
         buf[16] = 0;
-        segName = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
-        [segName retain];
+        segName = @(buf);
         
         if (swapBytes)
         {
@@ -66,7 +64,6 @@
         }
         
         data = aData;
-        [data retain];
     }
     return self;
 }
@@ -80,13 +77,11 @@
         
         strncpy(buf, aSect->sectname, 16);
         buf[16] = 0;
-        sectName = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
-        [sectName retain];
+        sectName = @(buf);
         
         strncpy(buf, aSect->segname, 16);
         buf[16] = 0;
-        segName = [NSString stringWithCString:buf encoding:NSASCIIStringEncoding];
-        [segName retain];
+        segName = @(buf);
         
         if (swapBytes)
         {
@@ -114,17 +109,10 @@
         }
         
         data = aData;
-        [data retain];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [sectName release];
-    [data release];
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark Properties

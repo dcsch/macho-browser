@@ -18,6 +18,6 @@
 @property(readonly) NSUInteger nsyms;
 @property(readonly) NSUInteger stroff;
 @property(readonly) NSUInteger strsize;
-@property(retain, readonly) NSArray *symbols;
+@property(strong, readonly) NSArray *symbols;
 
 @end
