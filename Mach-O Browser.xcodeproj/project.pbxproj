@@ -12,6 +12,8 @@
 		63232CC1109D0CBA0011A93E /* SymbolTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63232CC0109D0CBA0011A93E /* SymbolTableViewController.m */; };
 		63232CCF109D112A0011A93E /* SegmentLoadCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 63232CCE109D112A0011A93E /* SegmentLoadCommand.m */; };
 		63232CF2109D13DD0011A93E /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = 63232CF1109D13DD0011A93E /* Section.m */; };
+		6338E04B18066C47005A3263 /* HexDumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338E04918066C47005A3263 /* HexDumpViewController.m */; };
+		6338E04C18066C47005A3263 /* HexDumpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6338E04A18066C47005A3263 /* HexDumpView.xib */; };
 		6356E2F610B63BE600D45B60 /* gear.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6356E2F510B63BE600D45B60 /* gear.icns */; };
 		636E5DDB10A27A130061B1E7 /* SegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636E5DD910A27A130061B1E7 /* SegmentView.xib */; };
 		636E5E6310A2AEE30061B1E7 /* HexFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 636E5E6210A2AEE30061B1E7 /* HexFormatter.m */; };
@@ -47,6 +49,9 @@
 		63232CCE109D112A0011A93E /* SegmentLoadCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentLoadCommand.m; sourceTree = "<group>"; };
 		63232CF0109D13DD0011A93E /* Section.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Section.h; sourceTree = "<group>"; };
 		63232CF1109D13DD0011A93E /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Section.m; sourceTree = "<group>"; };
+		6338E04818066C47005A3263 /* HexDumpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexDumpViewController.h; sourceTree = "<group>"; };
+		6338E04918066C47005A3263 /* HexDumpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexDumpViewController.m; sourceTree = "<group>"; };
+		6338E04A18066C47005A3263 /* HexDumpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HexDumpView.xib; sourceTree = "<group>"; };
 		6356E2F510B63BE600D45B60 /* gear.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = gear.icns; sourceTree = "<group>"; };
 		636E5DDA10A27A130061B1E7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SegmentView.xib; sourceTree = "<group>"; };
 		636E5E6110A2AEE30061B1E7 /* HexFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexFormatter.h; sourceTree = "<group>"; };
@@ -135,6 +140,8 @@
 				636E5FCC10A3CDD00061B1E7 /* Symbol.m */,
 				63F09E0510F0540800445353 /* ErrorColorValueTransformer.h */,
 				63F09E0610F0540800445353 /* ErrorColorValueTransformer.m */,
+				6338E04818066C47005A3263 /* HexDumpViewController.h */,
+				6338E04918066C47005A3263 /* HexDumpViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -160,6 +167,7 @@
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				638A4BA1109AC16B00DE619A /* SimpleListView.xib */,
 				63232CBD109D0C850011A93E /* SymbolTableView.xib */,
+				6338E04A18066C47005A3263 /* HexDumpView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
+				6338E04C18066C47005A3263 /* HexDumpView.xib in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
 				63E8C87710990BDA001EA96D /* MachOWindow.xib in Resources */,
 				638A4BA2109AC16B00DE619A /* SimpleListView.xib in Resources */,
@@ -243,6 +252,7 @@
 				8D15AC310486D014006FF6A4 /* MachODocument.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				63E8C87C10990CD7001EA96D /* MachOWindowController.m in Sources */,
+				6338E04B18066C47005A3263 /* HexDumpViewController.m in Sources */,
 				63E8C8F6109911BB001EA96D /* MachObject.m in Sources */,
 				63E8CA3D109993B1001EA96D /* LoadCommand.m in Sources */,
 				63232CC1109D0CBA0011A93E /* SymbolTableViewController.m in Sources */,

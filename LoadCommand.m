@@ -24,9 +24,15 @@ struct local_thread_command {
 	/* ... */
 };
 
-@implementation LoadCommand
+@interface LoadCommand ()
+{
+    NSDictionary *dictionary;
+}
 
-@synthesize malformed;
+@end
+
+
+@implementation LoadCommand
 
 - (id)initWithData:(NSData *)aData offset:(NSUInteger)anOffset
 {
@@ -55,18 +61,17 @@ struct local_thread_command {
     self = [super init];
     if (self)
     {
-        data = aData;
-        offset = anOffset;
+        _data = aData;
+        _offset = anOffset;
     }
     return self;
 }
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 - (uint32_t)command
 {
-    struct load_command *lc = (struct load_command *)(data.bytes + offset);
+    struct load_command *lc = (struct load_command *)(_data.bytes + _offset);
     if (self.swapBytes)
         return CFSwapInt32(lc->cmd);
     else
@@ -148,13 +153,31 @@ struct local_thread_command {
             return @"LC_DYLD_INFO";
         case LC_DYLD_INFO_ONLY:
             return @"LC_DYLD_INFO_ONLY";
+        case LC_LOAD_UPWARD_DYLIB: /* load upward dylib */
+            return @"LC_LOAD_UPWARD_DYLIB";
+        case LC_VERSION_MIN_MACOSX:   /* build for MacOSX min OS version */
+            return @"LC_VERSION_MIN_MACOSX";
+        case LC_VERSION_MIN_IPHONEOS: /* build for iPhoneOS min OS version */
+            return @"LC_VERSION_MIN_IPHONEOS";
+        case LC_FUNCTION_STARTS: /* compressed table of function start addresses */
+            return @"LC_FUNCTION_STARTS";
+        case LC_DYLD_ENVIRONMENT: /* string for dyld to treat like environment variable */
+            return @"LC_DYLD_ENVIRONMENT";
+        case LC_MAIN: /* replacement for LC_UNIXTHREAD */
+            return @"LC_MAIN";
+        case LC_DATA_IN_CODE: /* table of non-instructions in __text */
+            return @"LC_DATA_IN_CODE";
+        case LC_SOURCE_VERSION: /* source version used to build binary */
+            return @"LC_SOURCE_VERSION";
+        case LC_DYLIB_CODE_SIGN_DRS: /* Code signing DRs copied from linked dylibs */
+            return @"LC_DYLIB_CODE_SIGN_DRS";
     }
     return [NSString stringWithFormat:@"0x%x", cmd];
 }
 
 - (uint32_t)commandSize
 {
-    struct load_command *lc = (struct load_command *)(data.bytes + offset);
+    struct load_command *lc = (struct load_command *)(_data.bytes + _offset);
     if (self.swapBytes)
         return CFSwapInt32(lc->cmdsize);
     else
@@ -166,7 +189,7 @@ struct local_thread_command {
     uint32_t cmd = self.command;
     if (cmd == LC_UUID)
     {
-        struct uuid_command *c = (struct uuid_command *)(data.bytes + offset);
+        struct uuid_command *c = (struct uuid_command *)(_data.bytes + _offset);
         NSString *uuidString = [NSString stringWithFormat:
                                 @"%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
                                 c->uuid[0],
@@ -201,7 +224,7 @@ struct local_thread_command {
 */
     else if (cmd == LC_DYSYMTAB)
     {
-        struct dysymtab_command *c = (struct dysymtab_command *)(data.bytes + offset);
+        struct dysymtab_command *c = (struct dysymtab_command *)(_data.bytes + _offset);
         if (self.swapBytes)
             return [NSDictionary dictionaryWithObjectsAndKeys:
                     @(CFSwapInt32(c->ilocalsym)), @"ilocalsym",
@@ -249,14 +272,14 @@ struct local_thread_command {
              || cmd == LC_LOAD_WEAK_DYLIB
              || cmd == LC_ID_DYLIB)
     {
-        struct dylib_command *c = (struct dylib_command *)(data.bytes + offset);
+        struct dylib_command *c = (struct dylib_command *)(_data.bytes + _offset);
         NSString *nameString;
         NSDate *timestampDate;
         NSString *currentVersionString;
         NSString *compatibilityVersionString;
         if (self.swapBytes)
         {
-            nameString = [NSString stringWithFormat:@"%s", data.bytes + offset + CFSwapInt32(c->dylib.name.offset)];
+            nameString = [NSString stringWithFormat:@"%s", _data.bytes + _offset + CFSwapInt32(c->dylib.name.offset)];
             timestampDate = [NSDate dateWithTimeIntervalSince1970:CFSwapInt32(c->dylib.timestamp)];
             currentVersionString = [NSString stringWithFormat:
                                     @"%d.%d.%d",
@@ -271,7 +294,7 @@ struct local_thread_command {
         }
         else
         {
-            nameString = [NSString stringWithFormat:@"%s", data.bytes + offset + c->dylib.name.offset];
+            nameString = [NSString stringWithFormat:@"%s", _data.bytes + _offset + c->dylib.name.offset];
             timestampDate = [NSDate dateWithTimeIntervalSince1970:c->dylib.timestamp];
             currentVersionString = [NSString stringWithFormat:
                                     @"%d.%d.%d",
@@ -293,19 +316,19 @@ struct local_thread_command {
     }
     else if (cmd == LC_LOAD_DYLINKER || cmd == LC_ID_DYLINKER)
     {
-        struct dylinker_command *c = (struct dylinker_command *)(data.bytes + offset);
+        struct dylinker_command *c = (struct dylinker_command *)(_data.bytes + _offset);
         NSString *nameString;
         if (self.swapBytes)
-            nameString = [NSString stringWithFormat:@"%s", data.bytes + offset + CFSwapInt32(c->name.offset)];
+            nameString = [NSString stringWithFormat:@"%s", _data.bytes + _offset + CFSwapInt32(c->name.offset)];
         else
-            nameString = [NSString stringWithFormat:@"%s", data.bytes + offset + c->name.offset];
+            nameString = [NSString stringWithFormat:@"%s", _data.bytes + _offset + c->name.offset];
         return [NSDictionary dictionaryWithObjectsAndKeys:
                 nameString, @"name",
                 nil, nil];
     }
     else if (cmd == LC_THREAD || cmd == LC_UNIXTHREAD)
     {
-        struct local_thread_command *c = (struct local_thread_command *)(data.bytes + offset);
+        struct local_thread_command *c = (struct local_thread_command *)(_data.bytes + _offset);
         if (self.swapBytes)
             return [NSDictionary dictionaryWithObjectsAndKeys:
                     @(CFSwapInt32(c->flavor)), @"flavor",
@@ -322,7 +345,7 @@ struct local_thread_command {
 
 - (BOOL)swapBytes
 {
-    uint32_t m = *(uint32_t *)data.bytes;
+    uint32_t m = *(uint32_t *)_data.bytes;
     if (m == MH_CIGAM || m == MH_CIGAM_64)
         return YES;
     else
@@ -374,6 +397,11 @@ struct local_thread_command {
             return YES;
     }
     return NO;
+}
+
+- (NSData *)commandData
+{
+    return [_data subdataWithRange:NSMakeRange(_offset, self.commandSize)];
 }
 
 @end

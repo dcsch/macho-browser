@@ -21,12 +21,12 @@
     self = [super init];
     if (self)
     {
-        data = aData;
-        offset = anOffset;
+        _data = aData;
+        _offset = anOffset;
 
         // Endianness?  Word-size?
         BOOL sixtyfour;
-        const char *bytes = data.bytes;
+        const char *bytes = _data.bytes;
         uint32_t m = *(uint32_t *)bytes;
         if (m == MH_MAGIC_64 || m == MH_CIGAM_64)
             sixtyfour = YES;
@@ -66,7 +66,7 @@
 
 - (NSUInteger)symoff
 {
-    struct symtab_command *c = (struct symtab_command *)(data.bytes + offset);
+    struct symtab_command *c = (struct symtab_command *)(_data.bytes + _offset);
     if (self.swapBytes)
         return CFSwapInt32(c->symoff);
     else
@@ -75,7 +75,7 @@
 
 - (NSUInteger)nsyms
 {
-    struct symtab_command *c = (struct symtab_command *)(data.bytes + offset);
+    struct symtab_command *c = (struct symtab_command *)(_data.bytes + _offset);
     if (self.swapBytes)
         return CFSwapInt32(c->nsyms);
     else
@@ -84,7 +84,7 @@
 
 - (NSUInteger)stroff
 {
-    struct symtab_command *c = (struct symtab_command *)(data.bytes + offset);
+    struct symtab_command *c = (struct symtab_command *)(_data.bytes + _offset);
     if (self.swapBytes)
         return CFSwapInt32(c->stroff);
     else
@@ -93,7 +93,7 @@
 
 - (NSUInteger)strsize
 {
-    struct symtab_command *c = (struct symtab_command *)(data.bytes + offset);
+    struct symtab_command *c = (struct symtab_command *)(_data.bytes + _offset);
     if (self.swapBytes)
         return CFSwapInt32(c->strsize);
     else

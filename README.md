@@ -7,6 +7,8 @@ including executables, shared libraries, and intermediate object files.
 
 Home: [githib.com/dcsch/macho-browser](https://github.com/dcsch/macho-browser)
 
+Keywords: os x, abi, mach, object, mach-o, browser, dump
+
 Introduction
 ------------
 

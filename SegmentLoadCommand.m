@@ -30,18 +30,18 @@
     self = [super init];
     if (self)
     {
-        data = aData;
-        offset = anOffset;
+        _data = aData;
+        _offset = anOffset;
 
         if (self.command == LC_SEGMENT)
         {
-            struct segment_command *c = (struct segment_command *)(data.bytes + offset);
+            struct segment_command *c = (struct segment_command *)(_data.bytes + _offset);
             char buf[17];
 
             if (c->cmdsize < 24)
             {
                 // There isn't enough data in the command to load the segname
-                malformed = YES;
+                _malformed = YES;
                 return self;
             }
 
@@ -50,7 +50,7 @@
             
             if (c->cmdsize < sizeof(struct segment_command))
             {
-                malformed = YES;
+                _malformed = YES;
                 return self;
             }
 
@@ -91,7 +91,7 @@
                         range = NSMakeRange(CFSwapInt32(sect->offset), CFSwapInt32(sect->size));
                     else
                         range = NSMakeRange(sect->offset, sect->size);
-                    sectionData = [data subdataWithRange:range];
+                    sectionData = [_data subdataWithRange:range];
                 }
                 Section *section = [[Section alloc] initWithSect:sect
                                                             data:sectionData
@@ -102,13 +102,13 @@
         }
         else if (self.command == LC_SEGMENT_64)
         {
-            struct segment_command_64 *c = (struct segment_command_64 *)(data.bytes + offset);
+            struct segment_command_64 *c = (struct segment_command_64 *)(_data.bytes + _offset);
             char buf[17];
 
             if (c->cmdsize < 24)
             {
                 // There isn't enough data in the command to load the segname
-                malformed = YES;
+                _malformed = YES;
                 return self;
             }
             
@@ -117,7 +117,7 @@
 
             if (c->cmdsize < sizeof(struct segment_command_64))
             {
-                malformed = YES;
+                _malformed = YES;
                 return self;
             }
 
@@ -158,7 +158,7 @@
                         range = NSMakeRange(CFSwapInt32(sect->offset), CFSwapInt64(sect->size));
                     else
                         range = NSMakeRange(sect->offset, sect->size);
-                    sectionData = [data subdataWithRange:range];
+                    sectionData = [_data subdataWithRange:range];
                 }
                 Section *section = [[Section alloc] initWithSect64:sect
                                                               data:sectionData

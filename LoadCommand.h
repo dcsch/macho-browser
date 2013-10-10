@@ -11,10 +11,9 @@
 
 @interface LoadCommand : NSObject
 {
-    NSData *data;
-    NSUInteger offset;
-    NSDictionary *dictionary;
-    BOOL malformed;
+    NSData *_data;
+    NSUInteger _offset;
+    BOOL _malformed;
 }
 
 @property(readonly) uint32_t command;
@@ -30,6 +29,8 @@
 @property(readonly) BOOL dataAvailable;
 
 @property(readonly) BOOL malformed;
+
+@property(readonly) NSData *commandData;
 
 - (id)initWithData:(NSData *)aData offset:(NSUInteger)anOffset;
 

@@ -10,16 +10,31 @@
 #import "LoadCommand.h"
 #import "SegmentViewController.h"
 #import "SymbolTableViewController.h"
+#import "HexDumpViewController.h"
 #include <mach-o/loader.h>
 
-#define MACHOWINDOW_NIB_NAME        @"MachOWindow"
 #define SIMPLELISTVIEW_NIB_NAME     @"SimpleListView"
 #define SEGMENTVIEW_NIB_NAME        @"SegmentView"
 #define SYMBOLTABLEVIEW_NIB_NAME    @"SymbolTableView"
+#define HEXDUMPVIEW_NIB_NAME        @"HexDumpView"
 
 #define kMinTableViewSplit          120.0f
 
-@interface MachOWindowController (Private)
+@interface MachOWindowController () <NSTableViewDelegate>
+{
+    IBOutlet NSView *placeHolderView;
+    IBOutlet NSArrayController *arrayController;
+    IBOutlet NSArrayController *archArrayController;
+    IBOutlet NSTableView *tableView;
+
+    NSView *currentView;
+    NSViewController *simpleListViewController;
+    SegmentViewController *segmentViewController;
+    SymbolTableViewController *symbolTableViewController;
+    HexDumpViewController *hexDumpViewController;
+}
+
+- (IBAction)selectArch:(id)sender;
 
 - (void)switchToView:(NSView *)newView;
 - (void)removeSubview;
@@ -27,16 +42,6 @@
 @end
 
 @implementation MachOWindowController
-
-- (id)init
-{
-    self = [super initWithWindowNibName:MACHOWINDOW_NIB_NAME];
-    if (self)
-    {
-    }
-    return self;
-}
-
 
 - (void)awakeFromNib
 {
@@ -47,6 +52,7 @@
                                                                     bundle:nil];
     symbolTableViewController = [[SymbolTableViewController alloc] initWithNibName:SYMBOLTABLEVIEW_NIB_NAME
                                                                             bundle:nil];
+    hexDumpViewController = [[HexDumpViewController alloc] initWithNibName:HEXDUMPVIEW_NIB_NAME bundle:nil];
     
     // Set the autosave names
     [self setShouldCascadeWindows:NO];
@@ -55,8 +61,7 @@
 //    [topBottomSplitView setAutosaveName:[NSString stringWithFormat:@"Horizontal %@", library.rootPath]];
 }
 
-#pragma mark -
-#pragma mark NSTableViewDelegate Methods
+#pragma mark - NSTableViewDelegate Methods
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
@@ -80,32 +85,38 @@
             [self switchToView:loadCommandViewController.view];
         }
         else
-            [self removeSubview];
+        {
+            //[self removeSubview];
+            hexDumpViewController.representedObject = loadCommand;
+            if (currentView == hexDumpViewController.view)
+                [hexDumpViewController.dumpTableView reloadData];
+            else
+                [self switchToView:hexDumpViewController.view];
+        }
     }
     else
         [self removeSubview];
 }
 
-#pragma mark -
-#pragma mark NSSplitViewDelegate Methods
+#pragma mark - NSSplitViewDelegate Methods
 
 // -------------------------------------------------------------------------------
 //	splitView:constrainMinCoordinate:
 //
 //	What you really have to do to set the minimum size of both subviews to kMinOutlineViewSplit points.
 // -------------------------------------------------------------------------------
-- (float)splitView:(NSSplitView *)splitView constrainMinCoordinate:(float)proposedCoordinate ofSubviewAt:(int)index
-{
-	return proposedCoordinate + kMinTableViewSplit;
-}
+//- (float)splitView:(NSSplitView *)splitView constrainMinCoordinate:(float)proposedCoordinate ofSubviewAt:(int)index
+//{
+//	return proposedCoordinate + kMinTableViewSplit;
+//}
 
-// -------------------------------------------------------------------------------
-//	splitView:constrainMaxCoordinate:
-// -------------------------------------------------------------------------------
-- (float)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(float)proposedCoordinate ofSubviewAt:(int)index
-{
-	return proposedCoordinate - kMinTableViewSplit;
-}
+//// -------------------------------------------------------------------------------
+////	splitView:constrainMaxCoordinate:
+//// -------------------------------------------------------------------------------
+//- (float)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(float)proposedCoordinate ofSubviewAt:(int)index
+//{
+//	return proposedCoordinate - kMinTableViewSplit;
+//}
 
 // -------------------------------------------------------------------------------
 //	splitView:resizeSubviewsWithOldSize:
@@ -132,8 +143,7 @@
 	[right setFrame:rightFrame];
 }
 
-#pragma mark -
-#pragma mark Actions
+#pragma mark - Actions
 
 - (IBAction)selectArch:(id)sender
 {
@@ -145,8 +155,7 @@
     NSLog(@"%@, Selection: %@", sender, arrayController.selection);
 }
 
-#pragma mark -
-#pragma mark Private Methods
+#pragma mark - Private Methods
 
 - (void)switchToView:(NSView *)newView
 {

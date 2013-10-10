@@ -27,7 +27,7 @@
 
 - (void)makeWindowControllers
 {
-    MachOWindowController *controller = [[MachOWindowController alloc] init];
+    MachOWindowController *controller = [[MachOWindowController alloc] initWithWindowNibName:@"MachOWindow"];
     [self addWindowController:controller];
 }
 

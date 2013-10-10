@@ -8,22 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class SegmentViewController;
-@class SymbolTableViewController;
-
-@interface MachOWindowController : NSWindowController <NSTableViewDelegate>
-{
-    IBOutlet NSView *placeHolderView;
-    IBOutlet NSArrayController *arrayController;
-    IBOutlet NSArrayController *archArrayController;
-    IBOutlet NSTableView *tableView;
-    
-    NSView *currentView;
-    NSViewController *simpleListViewController;
-    SegmentViewController *segmentViewController;
-    SymbolTableViewController *symbolTableViewController;
-}
-
-- (IBAction)selectArch:(id)sender;
+@interface MachOWindowController : NSWindowController
 
 @end

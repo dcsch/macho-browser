@@ -26,24 +26,24 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <splitView dividerStyle="paneSplitter" vertical="YES" id="100065">
-                        <rect key="frame" x="-1" y="32" width="605" height="379"/>
+                        <rect key="frame" x="0.0" y="32" width="605" height="379"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="100050">
-                                <rect key="frame" x="0.0" y="0.0" width="152" height="379"/>
+                                <rect key="frame" x="0.0" y="0.0" width="197" height="379"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <clipView key="contentView" id="M0l-ul-myH">
-                                    <rect key="frame" x="0.0" y="17" width="152" height="362"/>
+                                    <rect key="frame" x="0.0" y="17" width="197" height="362"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" headerView="100069" id="100053">
-                                            <rect key="frame" x="0.0" y="0.0" width="152" height="362"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="197" height="362"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="149" minWidth="40" maxWidth="1000" id="100055">
+                                                <tableColumn editable="NO" width="194" minWidth="40" maxWidth="1000" id="100055">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Load Commands">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -82,12 +82,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="100069">
-                                    <rect key="frame" x="0.0" y="0.0" width="152" height="17"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="197" height="17"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
                             <customView id="100064">
-                                <rect key="frame" x="162" y="0.0" width="443" height="379"/>
+                                <rect key="frame" x="207" y="0.0" width="398" height="379"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
                         </subviews>
