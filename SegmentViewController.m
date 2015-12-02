@@ -101,7 +101,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 
     if ([aTableColumn.identifier isEqualToString:@"address"])
     {
-        return [NSString stringWithFormat:@"%08x", 16 * rowIndex + section.addr];
+        return [NSString stringWithFormat:@"%08lx", 16 * rowIndex + section.addr];
     }
     else if ([aTableColumn.identifier isEqualToString:@"hex"])
     {

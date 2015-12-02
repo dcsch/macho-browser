@@ -127,7 +127,7 @@
     {
         if (i + 16 < length)
         {
-            [buf appendFormat:@"%08x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n",
+            [buf appendFormat:@"%08lx %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n",
              addr + i,
              bytes[i + 0],
              bytes[i + 1],
@@ -166,7 +166,7 @@
         {
             NSMutableString *hexBuf = [NSMutableString string];
             NSMutableString *charBuf = [NSMutableString string];
-            [hexBuf appendFormat:@"%08x ", addr + i];
+            [hexBuf appendFormat:@"%08lx ", addr + i];
             for (NSUInteger j = 0; j < 16; ++j)
             {
                 if (i + j < length)
