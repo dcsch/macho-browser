@@ -91,29 +91,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		19C28FB0FE9D524F11CA2CBB /* Products */ = {
+		032B87AF20D43C8E000200B7 /* MachOBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				8D15AC370486D014006FF6A4 /* Mach-O Browser.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		2A37F4AAFDCFA73011CA2CEA /* Mach-O Browser */ = {
-			isa = PBXGroup;
-			children = (
-				2A37F4ABFDCFA73011CA2CEA /* Classes */,
-				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
-				2A37F4B8FDCFA73011CA2CEA /* Resources */,
-				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
-				19C28FB0FE9D524F11CA2CBB /* Products */,
-			);
-			name = "Mach-O Browser";
-			sourceTree = "<group>";
-		};
-		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
-			isa = PBXGroup;
-			children = (
+				032B87B020D44285000200B7 /* Resources */,
 				2A37F4AEFDCFA73011CA2CEA /* MachODocument.h */,
 				2A37F4ACFDCFA73011CA2CEA /* MachODocument.m */,
 				63E8C87A10990CD7001EA96D /* MachOWindowController.h */,
@@ -142,34 +123,45 @@
 				63F09E0610F0540800445353 /* ErrorColorValueTransformer.m */,
 				6338E04818066C47005A3263 /* HexDumpViewController.h */,
 				6338E04918066C47005A3263 /* HexDumpViewController.m */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		2A37F4AFFDCFA73011CA2CEA /* Other Sources */ = {
-			isa = PBXGroup;
-			children = (
 				2564AD2C0F5327BB00F57823 /* Mach_O_Browser_Prefix.pch */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
-			name = "Other Sources";
+			path = MachOBrowser;
 			sourceTree = "<group>";
 		};
-		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
+		032B87B020D44285000200B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				6356E2F510B63BE600D45B60 /* gear.icns */,
+				8D15AC360486D014006FF6A4 /* Mach_O_Browser-Info.plist */,
+				6338E04A18066C47005A3263 /* HexDumpView.xib */,
 				636EB3E610B39E4C00D014A0 /* Mach-O Browser Help */,
 				636E5DD910A27A130061B1E7 /* SegmentView.xib */,
 				63E8C87510990BDA001EA96D /* MachOWindow.xib */,
-				8D15AC360486D014006FF6A4 /* Mach_O_Browser-Info.plist */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				1DDD582A0DA1D0D100B32029 /* MainMenu.xib */,
 				638A4BA1109AC16B00DE619A /* SimpleListView.xib */,
 				63232CBD109D0C850011A93E /* SymbolTableView.xib */,
-				6338E04A18066C47005A3263 /* HexDumpView.xib */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		19C28FB0FE9D524F11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D15AC370486D014006FF6A4 /* Mach-O Browser.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A37F4AAFDCFA73011CA2CEA /* Mach-O Browser */ = {
+			isa = PBXGroup;
+			children = (
+				032B87AF20D43C8E000200B7 /* MachOBrowser */,
+				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
+				19C28FB0FE9D524F11CA2CBB /* Products */,
+			);
+			name = "Mach-O Browser";
 			sourceTree = "<group>";
 		};
 		2A37F4C3FDCFA73011CA2CEA /* Frameworks */ = {
@@ -341,8 +333,8 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Mach_O_Browser_Prefix.pch;
-				INFOPLIST_FILE = "Mach_O_Browser-Info.plist";
+				GCC_PREFIX_HEADER = MachOBrowser/Mach_O_Browser_Prefix.pch;
+				INFOPLIST_FILE = "MachOBrowser/Mach_O_Browser-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.synchroma.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Mach-O Browser";
@@ -360,8 +352,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Mach_O_Browser_Prefix.pch;
-				INFOPLIST_FILE = "Mach_O_Browser-Info.plist";
+				GCC_PREFIX_HEADER = MachOBrowser/Mach_O_Browser_Prefix.pch;
+				INFOPLIST_FILE = "MachOBrowser/Mach_O_Browser-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.synchroma.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Mach-O Browser";
