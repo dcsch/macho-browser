@@ -1,5 +1,4 @@
-Mach-O Browser README
-=====================
+# Mach-O Browser README
 
 *Mach-O Browser* – A Mac application for browsing the contents of
 [Mach-O](http://en.wikipedia.org/wiki/Mach-O) (Mach Object) files,
@@ -7,18 +6,16 @@ including executables, shared libraries, and intermediate object files.
 
 Home: [githib.com/dcsch/macho-browser](https://github.com/dcsch/macho-browser)
 
-Keywords: os x, abi, mach, object, mach-o, browser, dump
+Keywords: macos, abi, mach, object, mach-o, browser, dump
 
-Introduction
-------------
+## Introduction
 
 *Mach-O Browser* aims to provide similar functionality to the
 [otool](http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man1/otool.1.html) and
 [nm](http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man1/nm.1.html)
 command-line tools, but utilising the Aqua interface of Mac OS X.
 
-Known Limitations
------------------
+## Known Limitations
 
 The following load commands don't display any data:
 - `LC_SYMSEG`
@@ -47,14 +44,16 @@ The following load commands don't display any data:
 - `LC_DYLD_INFO`
 - `LC_DYLD_INFO_ONLY`
 
-Changes
--------
+## Changes
 
-### Version 0.9(2)
+### Version 0.9 (3)
+- Added ability to open applications, which will load the executable named in the Info.plist.
+
+### Version 0.9 (2)
 - Removed extraneous control highlighting.
 - Malformed load commands are highlighted in red.  (Only for segments so far.)
 
-### Version 0.9(1)
+### Version 0.9 (1)
 - Initial public release.
 
 [David Schweinsberg](mailto:david.schweinsberg@gmail.com)

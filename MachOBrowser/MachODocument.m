@@ -90,4 +90,29 @@
     }
 }
 
+- (BOOL)readFromFileWrapper:(NSFileWrapper *)fileWrapper
+                     ofType:(NSString *)typeName
+                      error:(NSError * _Nullable __autoreleasing *)outError
+{
+    if (fileWrapper.directory)
+    {
+        // Dive into the app package and pick out the executable
+        NSFileWrapper *contentsWrapper = fileWrapper.fileWrappers[@"Contents"];
+        NSFileWrapper *infoFileWrapper = contentsWrapper.fileWrappers[@"Info.plist"];
+        NSDictionary<NSString *, id> *infoDict =
+        [NSPropertyListSerialization propertyListWithData:infoFileWrapper.regularFileContents
+                                                  options:NSPropertyListImmutable
+                                                   format:nil
+                                                    error:nil];
+        NSString *executable = [infoDict objectForKey:(NSString *)kCFBundleExecutableKey];
+        NSFileWrapper *macOSWrapper = contentsWrapper.fileWrappers[@"MacOS"];
+        NSFileWrapper *execFileWrapper = macOSWrapper.fileWrappers[executable];
+        return [self readFromData:execFileWrapper.regularFileContents ofType:typeName error:outError];
+    }
+    else
+    {
+        return [self readFromData:fileWrapper.regularFileContents ofType:typeName error:outError];
+    }
+}
+
 @end
