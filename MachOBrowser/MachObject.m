@@ -13,7 +13,7 @@
 
 @synthesize loadCommands;
 
-- (id)initWithData:(NSData *)objectData
+- (instancetype)initWithData:(NSData *)objectData
 {
     self = [super init];
     if (self)
@@ -36,8 +36,7 @@
         int32_t sizeofcmds = self.sizeOfCommands;
         while (sizeofcmds > 0)
         {
-            LoadCommand *loadCommand = [[LoadCommand alloc] initWithData:data
-                                                                  offset:offset];
+            LoadCommand *loadCommand = [LoadCommand loadCommandWithData:data offset:offset];
             [commands addObject:loadCommand];
             
             NSLog(@"cmd: %d, cmdsize: %d", loadCommand.command, loadCommand.commandSize);

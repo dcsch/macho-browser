@@ -16,12 +16,12 @@
 // struct thread_command has flavor and count commented out.  We only have
 // minimal support for this command at the moment.
 struct local_thread_command {
-	uint32_t	cmd;		/* LC_THREAD or  LC_UNIXTHREAD */
-	uint32_t	cmdsize;	/* total size of this command */
-	uint32_t flavor;		    /*flavor of thread state */
-	uint32_t count;		    /*count of longs in thread state */
-	/* struct XXX_thread_state state   thread state for this flavor */
-	/* ... */
+    uint32_t    cmd;        /* LC_THREAD or  LC_UNIXTHREAD */
+    uint32_t    cmdsize;    /* total size of this command */
+    uint32_t flavor;            /*flavor of thread state */
+    uint32_t count;            /*count of longs in thread state */
+    /* struct XXX_thread_state state   thread state for this flavor */
+    /* ... */
 };
 
 @interface LoadCommand ()
@@ -34,14 +34,10 @@ struct local_thread_command {
 
 @implementation LoadCommand
 
-- (id)initWithData:(NSData *)aData offset:(NSUInteger)anOffset
++ (instancetype)loadCommandWithData:(nonnull NSData *)data offset:(NSUInteger)offset
 {
-    // Trying to be clever with the following code, but it might be better
-    // to just use a factory function -- see if this causes confusion
-
-    // Determine if we need to return a subclass
-    const unsigned char *bytes = aData.bytes;
-    struct load_command *lc = (struct load_command *)(bytes + anOffset);
+    const unsigned char *bytes = data.bytes;
+    struct load_command *lc = (struct load_command *)(bytes + offset);
     uint32_t cmd;
     uint32_t m = *(uint32_t *)bytes;
     if (m == MH_CIGAM || m == MH_CIGAM_64)
@@ -51,13 +47,20 @@ struct local_thread_command {
 
     if (cmd == LC_SEGMENT || cmd == LC_SEGMENT_64)
     {
-        return [[SegmentLoadCommand alloc] initWithData:aData offset:anOffset];
+        return [[SegmentLoadCommand alloc] initWithData:data offset:offset];
     }
     else if (cmd == LC_SYMTAB)
     {
-        return [[SymbolTableLoadCommand alloc] initWithData:aData offset:anOffset];
+        return [[SymbolTableLoadCommand alloc] initWithData:data offset:offset];
     }
-    
+    else
+    {
+        return [[LoadCommand alloc] initWithData:data offset:offset];
+    }
+}
+
+- (instancetype)initWithData:(NSData *)aData offset:(NSUInteger)anOffset
+{
     self = [super init];
     if (self)
     {

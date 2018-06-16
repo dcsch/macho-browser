@@ -45,8 +45,8 @@
 
 - (void)awakeFromNib
 {
-	// Load the view controllers
-	simpleListViewController = [[NSViewController alloc] initWithNibName:SIMPLELISTVIEW_NIB_NAME
+    // Load the view controllers
+    simpleListViewController = [[NSViewController alloc] initWithNibName:SIMPLELISTVIEW_NIB_NAME
                                                                   bundle:nil];
     segmentViewController = [[SegmentViewController alloc] initWithNibName:SEGMENTVIEW_NIB_NAME
                                                                     bundle:nil];
@@ -56,7 +56,7 @@
     
     // Set the autosave names
     [self setShouldCascadeWindows:NO];
-    [self.window setFrameAutosaveName:[[self.document fileURL] path]];
+    [self.window setFrameAutosaveName:[self.document fileURL].path];
 //    [leftRightSplitView setAutosaveName:[NSString stringWithFormat:@"Vertical %@", library.rootPath]];
 //    [topBottomSplitView setAutosaveName:[NSString stringWithFormat:@"Horizontal %@", library.rootPath]];
 }
@@ -101,46 +101,46 @@
 #pragma mark - NSSplitViewDelegate Methods
 
 // -------------------------------------------------------------------------------
-//	splitView:constrainMinCoordinate:
+//    splitView:constrainMinCoordinate:
 //
-//	What you really have to do to set the minimum size of both subviews to kMinOutlineViewSplit points.
+//    What you really have to do to set the minimum size of both subviews to kMinOutlineViewSplit points.
 // -------------------------------------------------------------------------------
 //- (float)splitView:(NSSplitView *)splitView constrainMinCoordinate:(float)proposedCoordinate ofSubviewAt:(int)index
 //{
-//	return proposedCoordinate + kMinTableViewSplit;
+//    return proposedCoordinate + kMinTableViewSplit;
 //}
 
 //// -------------------------------------------------------------------------------
-////	splitView:constrainMaxCoordinate:
+////    splitView:constrainMaxCoordinate:
 //// -------------------------------------------------------------------------------
 //- (float)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(float)proposedCoordinate ofSubviewAt:(int)index
 //{
-//	return proposedCoordinate - kMinTableViewSplit;
+//    return proposedCoordinate - kMinTableViewSplit;
 //}
 
 // -------------------------------------------------------------------------------
-//	splitView:resizeSubviewsWithOldSize:
+//    splitView:resizeSubviewsWithOldSize:
 //
-//	Keep the left split pane from resizing as the user moves the divider line.
+//    Keep the left split pane from resizing as the user moves the divider line.
 // -------------------------------------------------------------------------------
 - (void)splitView:(NSSplitView*)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
-	NSRect newFrame = [sender frame]; // get the new size of the whole splitView
-	NSView *left = [sender subviews][0];
-	NSRect leftFrame = [left frame];
-	NSView *right = [sender subviews][1];
-	NSRect rightFrame = [right frame];
+    NSRect newFrame = sender.frame; // get the new size of the whole splitView
+    NSView *left = sender.subviews[0];
+    NSRect leftFrame = left.frame;
+    NSView *right = sender.subviews[1];
+    NSRect rightFrame = right.frame;
     
-	CGFloat dividerThickness = [sender dividerThickness];
+    CGFloat dividerThickness = sender.dividerThickness;
     
-	leftFrame.size.height = newFrame.size.height;
+    leftFrame.size.height = newFrame.size.height;
     
-	rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
-	rightFrame.size.height = newFrame.size.height;
-	rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
+    rightFrame.size.height = newFrame.size.height;
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
     
-	[left setFrame:leftFrame];
-	[right setFrame:rightFrame];
+    left.frame = leftFrame;
+    right.frame = rightFrame;
 }
 
 #pragma mark - Actions
@@ -168,27 +168,27 @@
         NSRect newBounds;
         newBounds.origin.x = 0;
         newBounds.origin.y = 0;
-        newBounds.size.width = [[currentView superview] frame].size.width;
-        newBounds.size.height = [[currentView superview] frame].size.height;
-        [currentView setFrame:[[currentView superview] frame]];
+        newBounds.size.width = currentView.superview.frame.size.width;
+        newBounds.size.height = currentView.superview.frame.size.height;
+        currentView.frame = currentView.superview.frame;
         
         // make sure our added subview is placed and resizes correctly
         [currentView setFrameOrigin:NSMakePoint(0,0)];
-        [currentView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+        currentView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     }
 }
 
 - (void)removeSubview
 {
-	// empty selection
-	NSArray *subViews = [placeHolderView subviews];
-	if ([subViews count] > 0)
-	{
-		[subViews[0] removeFromSuperview];
-	}
+    // empty selection
+    NSArray *subViews = placeHolderView.subviews;
+    if (subViews.count > 0)
+    {
+        [subViews[0] removeFromSuperview];
+    }
     currentView = nil;
-	
-	[placeHolderView displayIfNeeded];	// we want the removed views to disappear right away
+    
+    [placeHolderView displayIfNeeded];    // we want the removed views to disappear right away
 }
 
 @end

@@ -26,6 +26,8 @@
 
 @property(strong, readonly) NSArray *loadCommands;
 
-- (id)initWithData:(NSData *)objectData;
+- (instancetype)initWithData:(NSData *)objectData NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init __attribute__((unavailable));
 
 @end

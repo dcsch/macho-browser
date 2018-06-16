@@ -23,7 +23,7 @@
 @synthesize reserved2;
 @synthesize data;
 
-- (id)initWithSect:(struct section*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes
+- (instancetype)initWithSect:(struct section*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes
 {
     self = [super init];
     if (self)
@@ -68,7 +68,7 @@
     return self;
 }
 
-- (id)initWithSect64:(struct section_64*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes
+- (instancetype)initWithSect64:(struct section_64*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes
 {
     self = [super init];
     if (self)

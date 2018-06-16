@@ -24,12 +24,14 @@
 @property(readonly) NSUInteger desc;
 @property(readonly) uint64_t value;
 
-- (id)initWithNlist:(struct nlist *)symbolEntry
+- (instancetype)initWithNlist:(struct nlist *)symbolEntry
         stringTable:(const char *)stringTable
-          swapBytes:(BOOL)swapBytes;
+          swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
 
-- (id)initWithNlist64:(struct nlist_64 *)symbolEntry
+- (instancetype)initWithNlist64:(struct nlist_64 *)symbolEntry
           stringTable:(const char *)stringTable
-            swapBytes:(BOOL)swapBytes;
+            swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init __attribute__((unavailable));
 
 @end

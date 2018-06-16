@@ -18,11 +18,11 @@
 
 @property(readonly) uint32_t command;
 
-@property(copy, readonly) NSString *commandName;
+@property(nonnull, readonly) NSString *commandName;
 
 @property(readonly) uint32_t commandSize;
 
-@property(weak, readonly) NSDictionary *dictionary;
+@property(nullable, weak, readonly) NSDictionary *dictionary;
 
 @property(readonly) BOOL swapBytes;
 
@@ -30,8 +30,12 @@
 
 @property(readonly) BOOL malformed;
 
-@property(readonly) NSData *commandData;
+@property(nonnull, readonly) NSData *commandData;
 
-- (id)initWithData:(NSData *)aData offset:(NSUInteger)anOffset;
+- (instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init __attribute__((unavailable));
+
++ (instancetype)loadCommandWithData:(nonnull NSData *)data offset:(NSUInteger)offset;
 
 @end

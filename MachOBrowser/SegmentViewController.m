@@ -27,11 +27,11 @@
     column = (tableView.tableColumns)[8];
     [column.dataCell setFormatter:hexFormatter];
     
-    [vmaddrTextField setFormatter:hexFormatter];
-    [vmsizeTextField setFormatter:hexFormatter];
-    [maxprotTextField setFormatter:hexFormatter];
-    [initprotTextField setFormatter:hexFormatter];
-    [flagsTextField setFormatter:hexFormatter];
+    vmaddrTextField.formatter = hexFormatter;
+    vmsizeTextField.formatter = hexFormatter;
+    maxprotTextField.formatter = hexFormatter;
+    initprotTextField.formatter = hexFormatter;
+    flagsTextField.formatter = hexFormatter;
     
     
     // Set a fixed-width font for the text dump view

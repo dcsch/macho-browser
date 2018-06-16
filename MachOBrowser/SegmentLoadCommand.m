@@ -23,16 +23,11 @@
 @synthesize flags;
 @synthesize sections;
 
-- (id)initWithData:(NSData *)aData offset:(NSUInteger)anOffset
+- (instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset
 {
-    // We don't call the superclass initWithData:offset: so we don't
-    // infinitely recurse on ourselves
-    self = [super init];
+    self = [super initWithData:aData offset:anOffset];
     if (self)
     {
-        _data = aData;
-        _offset = anOffset;
-
         if (self.command == LC_SEGMENT)
         {
             struct segment_command *c = (struct segment_command *)(_data.bytes + _offset);
@@ -172,8 +167,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 - (NSDictionary *)dictionary
 {
@@ -192,7 +186,7 @@
                 @(flags), @"flags",
                 nil, nil];
     }
-    return [super dictionary];
+    return super.dictionary;
 }
 
 @end

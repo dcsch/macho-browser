@@ -14,16 +14,11 @@
 
 @synthesize symbols;
 
-- (id)initWithData:(NSData *)aData offset:(NSUInteger)anOffset
+- (instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset
 {
-    // We don't call the superclass initWithData:offset: so we don't
-    // infinitely recurse on ourselves
-    self = [super init];
+    self = [super initWithData:aData offset:anOffset];
     if (self)
     {
-        _data = aData;
-        _offset = anOffset;
-
         // Endianness?  Word-size?
         BOOL sixtyfour;
         const char *bytes = _data.bytes;
@@ -61,8 +56,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 - (NSUInteger)symoff
 {

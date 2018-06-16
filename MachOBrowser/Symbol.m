@@ -17,7 +17,7 @@
 @synthesize desc;
 @synthesize value;
 
-- (id)initWithNlist:(struct nlist *)symbolEntry
+- (instancetype)initWithNlist:(struct nlist *)symbolEntry
         stringTable:(const char *)stringTable
           swapBytes:(BOOL)swapBytes
 {
@@ -44,7 +44,7 @@
     return self;
 }
 
-- (id)initWithNlist64:(struct nlist_64 *)symbolEntry
+- (instancetype)initWithNlist64:(struct nlist_64 *)symbolEntry
           stringTable:(const char *)stringTable
             swapBytes:(BOOL)swapBytes
 {

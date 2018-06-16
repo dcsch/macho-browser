@@ -15,7 +15,7 @@
 
 @synthesize machObjects;
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self)
@@ -104,7 +104,7 @@
                                                   options:NSPropertyListImmutable
                                                    format:nil
                                                     error:nil];
-        NSString *executable = [infoDict objectForKey:(NSString *)kCFBundleExecutableKey];
+        NSString *executable = infoDict[(NSString *)kCFBundleExecutableKey];
         NSFileWrapper *macOSWrapper = contentsWrapper.fileWrappers[@"MacOS"];
         NSFileWrapper *execFileWrapper = macOSWrapper.fileWrappers[executable];
         return [self readFromData:execFileWrapper.regularFileContents ofType:typeName error:outError];
