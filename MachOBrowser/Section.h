@@ -10,20 +10,6 @@
 #include <mach-o/loader.h>
 
 @interface Section : NSObject
-{
-    NSString *sectName;
-    NSString *segName;
-    NSUInteger addr;
-    NSUInteger size;
-    NSUInteger offset;
-    NSUInteger align;
-    NSUInteger reloff;
-    NSUInteger nreloc;
-    NSUInteger flags;
-    NSUInteger reserved1;
-    NSUInteger reserved2;
-    NSData *data;
-}
 
 @property(copy, readonly) NSString *sectName;
 @property(copy, readonly) NSString *segName;

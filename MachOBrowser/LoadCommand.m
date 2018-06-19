@@ -213,6 +213,11 @@ struct local_thread_command {
                                 c->uuid[15]];
         return [NSDictionary dictionaryWithObjectsAndKeys:uuidString, @"uuid", nil, nil];
     }
+    else if (cmd == LC_RPATH)
+    {
+        struct rpath_command *c = (struct rpath_command *)(_data.bytes + _offset);
+        return @{@"path": [NSString stringWithUTF8String:_data.bytes + _offset + c->path.offset]};
+    }
 /*
     else if (cmd == LC_SYMTAB)
     {
@@ -343,6 +348,24 @@ struct local_thread_command {
                     @(c->count), @"count",
                     nil, nil];
     }
+    else if (cmd == LC_MAIN)
+    {
+        struct entry_point_command *c = (struct entry_point_command *)(_data.bytes + _offset);
+        uint64_t entryoff;
+        uint64_t stacksize;
+        if (self.swapBytes)
+        {
+            entryoff = CFSwapInt64(c->entryoff);
+            stacksize = CFSwapInt64(c->stacksize);
+        }
+        else
+        {
+            entryoff = c->entryoff;
+            stacksize = c->stacksize;
+        }
+        return @{@"entryoff": @(entryoff),
+                 @"stacksize": @(stacksize)};
+    }
     return nil;
 }
 
@@ -389,7 +412,7 @@ struct local_thread_command {
         case LC_SEGMENT_64:
         //case LC_ROUTINES_64:
         case LC_UUID:
-        //case LC_RPATH:
+        case LC_RPATH:
         //case LC_CODE_SIGNATURE:
         //case LC_SEGMENT_SPLIT_INFO:
         //case LC_REEXPORT_DYLIB:
@@ -397,6 +420,7 @@ struct local_thread_command {
         //case LC_ENCRYPTION_INFO:
         //case LC_DYLD_INFO:
         //case LC_DYLD_INFO_ONLY:
+        case LC_MAIN:
             return YES;
     }
     return NO;

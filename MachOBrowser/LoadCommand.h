@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface LoadCommand : NSObject
 {
     NSData *_data;

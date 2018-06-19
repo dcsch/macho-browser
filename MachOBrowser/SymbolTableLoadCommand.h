@@ -10,9 +10,6 @@
 #import "LoadCommand.h"
 
 @interface SymbolTableLoadCommand : LoadCommand
-{
-    NSArray *symbols;
-}
 
 @property(readonly) NSUInteger symoff;
 @property(readonly) NSUInteger nsyms;

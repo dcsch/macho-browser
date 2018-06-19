@@ -10,11 +10,6 @@
 #include <mach-o/loader.h>
 
 @interface MachObject : NSObject
-{
-    NSData *data;
-    BOOL swapBytes;
-    NSArray *loadCommands;
-}
 
 @property(readonly) uint32_t magic;
 

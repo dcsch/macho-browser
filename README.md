@@ -1,4 +1,4 @@
-# Mach-O Browser README
+# Mach-O Browser
 
 *Mach-O Browser* – A Mac application for browsing the contents of
 [Mach-O](http://en.wikipedia.org/wiki/Mach-O) (Mach Object) files,
@@ -35,7 +35,6 @@ The following load commands don't display any data:
 - `LC_TWOLEVEL_HINTS`
 - `LC_PREBIND_CKSUM`
 - `LC_ROUTINES_64`
-- `LC_RPATH`
 - `LC_CODE_SIGNATURE`
 - `LC_SEGMENT_SPLIT_INFO`
 - `LC_REEXPORT_DYLIB`
@@ -48,6 +47,7 @@ The following load commands don't display any data:
 
 ### Version 0.9 (3)
 - Added ability to open applications, which will load the executable named in the Info.plist.
+- Added  `LC_RPATH`, `LC_MAIN`.
 
 ### Version 0.9 (2)
 - Removed extraneous control highlighting.

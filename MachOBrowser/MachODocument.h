@@ -10,9 +10,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MachODocument : NSDocument
-{
-    NSArray *machObjects;
-}
 
 @property(strong, readonly) NSArray *machObjects;
 

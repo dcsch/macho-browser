@@ -13,8 +13,6 @@
 
 @implementation MachODocument
 
-@synthesize machObjects;
-
 - (instancetype)init
 {
     self = [super init];
@@ -81,7 +79,7 @@
     
     if (objects.count > 0)
     {
-        machObjects = objects;
+        _machObjects = objects;
         return YES;
     }
     else

@@ -10,21 +10,23 @@
 #import "LoadCommand.h"
 
 @implementation MachObject
-
-@synthesize loadCommands;
+{
+    NSData *_data;
+    BOOL _swapBytes;
+}
 
 - (instancetype)initWithData:(NSData *)objectData
 {
     self = [super init];
     if (self)
     {
-        data = objectData;
+        _data = objectData;
         
         uint32_t m = self.magic;
         if (m == MH_CIGAM || m == MH_CIGAM_64)
-            swapBytes = YES;
+            _swapBytes = YES;
         else
-            swapBytes = NO;
+            _swapBytes = NO;
         
         // Scan through all the load commands
         NSMutableArray *commands = [NSMutableArray array];
@@ -36,15 +38,15 @@
         int32_t sizeofcmds = self.sizeOfCommands;
         while (sizeofcmds > 0)
         {
-            LoadCommand *loadCommand = [LoadCommand loadCommandWithData:data offset:offset];
+            LoadCommand *loadCommand = [LoadCommand loadCommandWithData:_data offset:offset];
             [commands addObject:loadCommand];
             
-            NSLog(@"cmd: %d, cmdsize: %d", loadCommand.command, loadCommand.commandSize);
+            NSLog(@"cmd: %u, cmdsize: %u", loadCommand.command, loadCommand.commandSize);
             
             offset += loadCommand.commandSize;
             sizeofcmds -= loadCommand.commandSize;
         }
-        loadCommands = commands;
+        _loadCommands = commands;
     }
     return self;
 }
@@ -57,64 +59,62 @@
     switch (ct)
     {
         case CPU_TYPE_VAX:
-            cpuString = @" (vax)";
+            cpuString = @"vax";
             break;
         case CPU_TYPE_MC680x0:
-            cpuString = @" (mc680x0)";
+            cpuString = @"mc680x0";
             break;
         case CPU_TYPE_I386:
-            cpuString = @" (i386)";
+            cpuString = @"i386";
             break;
         case CPU_TYPE_X86_64:
-            cpuString = @" (x86_64)";
+            cpuString = @"x86_64";
             break;
         case CPU_TYPE_MC98000:
-            cpuString = @" (mc98000)";
+            cpuString = @"mc98000";
             break;
         case CPU_TYPE_HPPA:
-            cpuString = @" (hppa)";
+            cpuString = @"hppa";
             break;
         case CPU_TYPE_ARM:
-            cpuString = @" (arm)";
+            cpuString = @"arm";
             break;
         case CPU_TYPE_MC88000:
-            cpuString = @" (mc88000)";
+            cpuString = @"mc88000";
             break;
         case CPU_TYPE_SPARC:
-            cpuString = @" (sparc)";
+            cpuString = @"sparc";
             break;
         case CPU_TYPE_I860:
-            cpuString = @" (i860)";
+            cpuString = @"i860";
             break;
         case CPU_TYPE_POWERPC:
-            cpuString = @" (ppc)";
+            cpuString = @"ppc";
             break;
         case CPU_TYPE_POWERPC64:
-            cpuString = @" (ppc64)";
+            cpuString = @"ppc64";
             break;
         default:
-            cpuString = @"";
+            cpuString = [NSString stringWithFormat:@"%x", self.cpuType];
             break;
     }
-    return [NSString stringWithFormat:@"CPU Type: %d%@, CPU Subtype: %d",
-            self.cpuType,
+    return [NSString stringWithFormat:@"CPU Type: %@, CPU Subtype: %x",
             cpuString,
             self.cpuSubtype];
 }
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 - (uint32_t)magic
 {
-    struct mach_header *header = (struct mach_header *)data.bytes;
+    struct mach_header *header = (struct mach_header *)_data.bytes;
     return header->magic;
 }
 
 - (cpu_type_t)cpuType
 {
-    struct mach_header *header = (struct mach_header *)data.bytes;
-    if (swapBytes)
+    struct mach_header *header = (struct mach_header *)_data.bytes;
+    if (_swapBytes)
         return CFSwapInt32(header->cputype);
     else
         return header->cputype;
@@ -122,8 +122,8 @@
 
 - (cpu_subtype_t)cpuSubtype
 {
-    struct mach_header *header = (struct mach_header *)data.bytes;
-    if (swapBytes)
+    struct mach_header *header = (struct mach_header *)_data.bytes;
+    if (_swapBytes)
         return CFSwapInt32(header->cpusubtype);
     else
         return header->cpusubtype;
@@ -131,8 +131,8 @@
 
 - (uint32_t)sizeOfCommands
 {
-    struct mach_header *header = (struct mach_header *)data.bytes;
-    if (swapBytes)
+    struct mach_header *header = (struct mach_header *)_data.bytes;
+    if (_swapBytes)
         return CFSwapInt32(header->sizeofcmds);
     else
         return header->sizeofcmds;

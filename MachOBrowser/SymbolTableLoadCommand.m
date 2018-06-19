@@ -12,8 +12,6 @@
 
 @implementation SymbolTableLoadCommand
 
-@synthesize symbols;
-
 - (instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset
 {
     self = [super initWithData:aData offset:anOffset];
@@ -50,7 +48,7 @@
             }
             [array addObject:symbol];
         }
-        symbols = array;
+        _symbols = array;
     }
     return self;
 }

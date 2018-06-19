@@ -10,13 +10,6 @@
 #include <mach-o/nlist.h>
 
 @interface Symbol : NSObject
-{
-    NSString *name;
-    NSUInteger type;
-    NSUInteger sect;
-    NSUInteger desc;
-    uint64_t value;
-}
 
 @property(copy, readonly) NSString *name;
 @property(readonly) NSUInteger type;

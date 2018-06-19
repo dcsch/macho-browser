@@ -10,18 +10,6 @@
 #import "LoadCommand.h"
 
 @interface SegmentLoadCommand : LoadCommand
-{
-    NSString *segName;
-    uint64_t vmaddr;
-    uint64_t vmsize;
-    NSUInteger fileoff;
-    NSUInteger filesize;
-    NSUInteger maxprot;
-    NSUInteger initprot;
-    NSUInteger nsects;
-    NSUInteger flags;
-    NSArray *sections;
-}
 
 @property(copy, readonly) NSString *segName;
 @property(readonly) uint64_t vmaddr;

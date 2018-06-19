@@ -12,17 +12,6 @@
 
 @implementation SegmentLoadCommand
 
-@synthesize segName;
-@synthesize vmaddr;
-@synthesize vmsize;
-@synthesize fileoff;
-@synthesize filesize;
-@synthesize maxprot;
-@synthesize initprot;
-@synthesize nsects;
-@synthesize flags;
-@synthesize sections;
-
 - (instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset
 {
     self = [super initWithData:aData offset:anOffset];
@@ -41,7 +30,7 @@
             }
 
             strncpy(buf, c->segname, 16);
-            segName = @(buf);
+            _segName = @(buf);
             
             if (c->cmdsize < sizeof(struct segment_command))
             {
@@ -51,30 +40,30 @@
 
             if (self.swapBytes)
             {
-                vmaddr = CFSwapInt32(c->vmaddr);
-                vmsize = CFSwapInt32(c->vmsize);
-                fileoff = CFSwapInt32(c->fileoff);
-                filesize = CFSwapInt32(c->filesize);
-                maxprot = CFSwapInt32(c->maxprot);
-                initprot = CFSwapInt32(c->initprot);
-                nsects = CFSwapInt32(c->nsects);
-                flags = CFSwapInt32(c->flags);
+                _vmaddr = CFSwapInt32(c->vmaddr);
+                _vmsize = CFSwapInt32(c->vmsize);
+                _fileoff = CFSwapInt32(c->fileoff);
+                _filesize = CFSwapInt32(c->filesize);
+                _maxprot = CFSwapInt32(c->maxprot);
+                _initprot = CFSwapInt32(c->initprot);
+                _nsects = CFSwapInt32(c->nsects);
+                _flags = CFSwapInt32(c->flags);
             }
             else
             {
-                vmaddr = c->vmaddr;
-                vmsize = c->vmsize;
-                fileoff = c->fileoff;
-                filesize = c->filesize;
-                maxprot = c->maxprot;
-                initprot = c->initprot;
-                nsects = c->nsects;
-                flags = c->flags;
+                _vmaddr = c->vmaddr;
+                _vmsize = c->vmsize;
+                _fileoff = c->fileoff;
+                _filesize = c->filesize;
+                _maxprot = c->maxprot;
+                _initprot = c->initprot;
+                _nsects = c->nsects;
+                _flags = c->flags;
             }
             
             // Read sections
-            NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:nsects];
-            for (NSUInteger i = 0; i < nsects; ++i)
+            NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:_nsects];
+            for (NSUInteger i = 0; i < _nsects; ++i)
             {
                 struct section *sect = ((struct section *)(c + 1) + i);
                 uint32_t size = self.swapBytes ? CFSwapInt32(sect->size) : sect->size;
@@ -93,7 +82,7 @@
                                                        swapBytes:self.swapBytes];
                 [array addObject:section];
             }
-            sections = array;
+            _sections = array;
         }
         else if (self.command == LC_SEGMENT_64)
         {
@@ -108,7 +97,7 @@
             }
             
             strncpy(buf, c->segname, 16);
-            segName = @(buf);
+            _segName = @(buf);
 
             if (c->cmdsize < sizeof(struct segment_command_64))
             {
@@ -118,30 +107,30 @@
 
             if (self.swapBytes)
             {
-                vmaddr = CFSwapInt64(c->vmaddr);
-                vmsize = CFSwapInt64(c->vmsize);
-                fileoff = CFSwapInt64(c->fileoff);
-                filesize = CFSwapInt64(c->filesize);
-                maxprot = CFSwapInt32(c->maxprot);
-                initprot = CFSwapInt32(c->initprot);
-                nsects = CFSwapInt32(c->nsects);
-                flags = CFSwapInt32(c->flags);
+                _vmaddr = CFSwapInt64(c->vmaddr);
+                _vmsize = CFSwapInt64(c->vmsize);
+                _fileoff = CFSwapInt64(c->fileoff);
+                _filesize = CFSwapInt64(c->filesize);
+                _maxprot = CFSwapInt32(c->maxprot);
+                _initprot = CFSwapInt32(c->initprot);
+                _nsects = CFSwapInt32(c->nsects);
+                _flags = CFSwapInt32(c->flags);
             }
             else
             {
-                vmaddr = c->vmaddr;
-                vmsize = c->vmsize;
-                fileoff = c->fileoff;
-                filesize = c->filesize;
-                maxprot = c->maxprot;
-                initprot = c->initprot;
-                nsects = c->nsects;
-                flags = c->flags;
+                _vmaddr = c->vmaddr;
+                _vmsize = c->vmsize;
+                _fileoff = c->fileoff;
+                _filesize = c->filesize;
+                _maxprot = c->maxprot;
+                _initprot = c->initprot;
+                _nsects = c->nsects;
+                _flags = c->flags;
             }
             
             // Read sections
-            NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:nsects];
-            for (NSUInteger i = 0; i < nsects; ++i)
+            NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:_nsects];
+            for (NSUInteger i = 0; i < _nsects; ++i)
             {
                 struct section_64 *sect = ((struct section_64 *)(c + 1) + i);
                 uint64_t size = self.swapBytes ? CFSwapInt64(sect->size) : sect->size;
@@ -160,7 +149,7 @@
                                                          swapBytes:self.swapBytes];
                 [array addObject:section];
             }
-            sections = array;
+            _sections = array;
         }
     }
     return self;
@@ -176,14 +165,14 @@
     {
         return [NSDictionary dictionaryWithObjectsAndKeys:
                 self.segName, @"segname",
-                @(vmaddr), @"vmaddr",
-                @(vmsize), @"vmsize",
-                @(fileoff), @"fileoff",
-                @(filesize), @"filesize",
-                @(maxprot), @"maxprot",
-                @(initprot), @"initprot",
-                @(nsects), @"nsects",
-                @(flags), @"flags",
+                @(_vmaddr), @"vmaddr",
+                @(_vmsize), @"vmsize",
+                @(_fileoff), @"fileoff",
+                @(_filesize), @"filesize",
+                @(_maxprot), @"maxprot",
+                @(_initprot), @"initprot",
+                @(_nsects), @"nsects",
+                @(_flags), @"flags",
                 nil, nil];
     }
     return super.dictionary;

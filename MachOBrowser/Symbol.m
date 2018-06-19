@@ -8,14 +8,7 @@
 
 #import "Symbol.h"
 
-
 @implementation Symbol
-
-@synthesize name;
-@synthesize type;
-@synthesize sect;
-@synthesize desc;
-@synthesize value;
 
 - (instancetype)initWithNlist:(struct nlist *)symbolEntry
         stringTable:(const char *)stringTable
@@ -25,21 +18,21 @@
     if (self)
     {
         int32_t strx;
-        type = symbolEntry->n_type;
-        sect = symbolEntry->n_sect;
+        _type = symbolEntry->n_type;
+        _sect = symbolEntry->n_sect;
         if (swapBytes)
         {
             strx = CFSwapInt32(symbolEntry->n_un.n_strx);
-            desc = CFSwapInt16(symbolEntry->n_desc);
-            value = CFSwapInt32(symbolEntry->n_value);
+            _desc = CFSwapInt16(symbolEntry->n_desc);
+            _value = CFSwapInt32(symbolEntry->n_value);
         }
         else
         {
             strx = symbolEntry->n_un.n_strx;
-            desc = symbolEntry->n_desc;
-            value = symbolEntry->n_value;
+            _desc = symbolEntry->n_desc;
+            _value = symbolEntry->n_value;
         }
-        name = @(stringTable + strx);
+        _name = @(stringTable + strx);
     }
     return self;
 }
@@ -52,21 +45,21 @@
     if (self)
     {
         int32_t strx;
-        type = symbolEntry->n_type;
-        sect = symbolEntry->n_sect;
+        _type = symbolEntry->n_type;
+        _sect = symbolEntry->n_sect;
         if (swapBytes)
         {
             strx = CFSwapInt32(symbolEntry->n_un.n_strx);
-            desc = CFSwapInt16(symbolEntry->n_desc);
-            value = CFSwapInt64(symbolEntry->n_value);
+            _desc = CFSwapInt16(symbolEntry->n_desc);
+            _value = CFSwapInt64(symbolEntry->n_value);
         }
         else
         {
             strx = symbolEntry->n_un.n_strx;
-            desc = symbolEntry->n_desc;
-            value = symbolEntry->n_value;
+            _desc = symbolEntry->n_desc;
+            _value = symbolEntry->n_value;
         }
-        name = @(stringTable + strx);
+        _name = @(stringTable + strx);
     }
     return self;
 }

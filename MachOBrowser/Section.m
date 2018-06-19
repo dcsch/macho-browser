@@ -10,19 +10,6 @@
 
 @implementation Section
 
-@synthesize sectName;
-@synthesize segName;
-@synthesize addr;
-@synthesize size;
-@synthesize offset;
-@synthesize align;
-@synthesize reloff;
-@synthesize nreloc;
-@synthesize flags;
-@synthesize reserved1;
-@synthesize reserved2;
-@synthesize data;
-
 - (instancetype)initWithSect:(struct section*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes
 {
     self = [super init];
@@ -32,38 +19,38 @@
 
         strncpy(buf, aSect->sectname, 16);
         buf[16] = 0;
-        sectName = @(buf);
+        _sectName = @(buf);
 
         strncpy(buf, aSect->segname, 16);
         buf[16] = 0;
-        segName = @(buf);
+        _segName = @(buf);
         
         if (swapBytes)
         {
-            addr = CFSwapInt32(aSect->addr);
-            size = CFSwapInt32(aSect->size);
-            offset = CFSwapInt32(aSect->offset);
-            align = CFSwapInt32(aSect->align);
-            reloff = CFSwapInt32(aSect->reloff);
-            nreloc = CFSwapInt32(aSect->nreloc);
-            flags = CFSwapInt32(aSect->flags);
-            reserved1 = CFSwapInt32(aSect->reserved1);
-            reserved2 = CFSwapInt32(aSect->reserved2);
+            _addr = CFSwapInt32(aSect->addr);
+            _size = CFSwapInt32(aSect->size);
+            _offset = CFSwapInt32(aSect->offset);
+            _align = CFSwapInt32(aSect->align);
+            _reloff = CFSwapInt32(aSect->reloff);
+            _nreloc = CFSwapInt32(aSect->nreloc);
+            _flags = CFSwapInt32(aSect->flags);
+            _reserved1 = CFSwapInt32(aSect->reserved1);
+            _reserved2 = CFSwapInt32(aSect->reserved2);
         }
         else
         {
-            addr = aSect->addr;
-            size = aSect->size;
-            offset = aSect->offset;
-            align = aSect->align;
-            reloff = aSect->reloff;
-            nreloc = aSect->nreloc;
-            flags = aSect->flags;
-            reserved1 = aSect->reserved1;
-            reserved2 = aSect->reserved2;
+            _addr = aSect->addr;
+            _size = aSect->size;
+            _offset = aSect->offset;
+            _align = aSect->align;
+            _reloff = aSect->reloff;
+            _nreloc = aSect->nreloc;
+            _flags = aSect->flags;
+            _reserved1 = aSect->reserved1;
+            _reserved2 = aSect->reserved2;
         }
         
-        data = aData;
+        _data = aData;
     }
     return self;
 }
@@ -77,58 +64,56 @@
         
         strncpy(buf, aSect->sectname, 16);
         buf[16] = 0;
-        sectName = @(buf);
+        _sectName = @(buf);
         
         strncpy(buf, aSect->segname, 16);
         buf[16] = 0;
-        segName = @(buf);
+        _segName = @(buf);
         
         if (swapBytes)
         {
-            addr = CFSwapInt64(aSect->addr);
-            size = CFSwapInt64(aSect->size);
-            offset = CFSwapInt32(aSect->offset);
-            align = CFSwapInt32(aSect->align);
-            reloff = CFSwapInt32(aSect->reloff);
-            nreloc = CFSwapInt32(aSect->nreloc);
-            flags = CFSwapInt32(aSect->flags);
-            reserved1 = CFSwapInt32(aSect->reserved1);
-            reserved2 = CFSwapInt32(aSect->reserved2);
+            _addr = CFSwapInt64(aSect->addr);
+            _size = CFSwapInt64(aSect->size);
+            _offset = CFSwapInt32(aSect->offset);
+            _align = CFSwapInt32(aSect->align);
+            _reloff = CFSwapInt32(aSect->reloff);
+            _nreloc = CFSwapInt32(aSect->nreloc);
+            _flags = CFSwapInt32(aSect->flags);
+            _reserved1 = CFSwapInt32(aSect->reserved1);
+            _reserved2 = CFSwapInt32(aSect->reserved2);
         }
         else
         {
-            addr = aSect->addr;
-            size = aSect->size;
-            offset = aSect->offset;
-            align = aSect->align;
-            reloff = aSect->reloff;
-            nreloc = aSect->nreloc;
-            flags = aSect->flags;
-            reserved1 = aSect->reserved1;
-            reserved2 = aSect->reserved2;
+            _addr = aSect->addr;
+            _size = aSect->size;
+            _offset = aSect->offset;
+            _align = aSect->align;
+            _reloff = aSect->reloff;
+            _nreloc = aSect->nreloc;
+            _flags = aSect->flags;
+            _reserved1 = aSect->reserved1;
+            _reserved2 = aSect->reserved2;
         }
         
-        data = aData;
+        _data = aData;
     }
     return self;
 }
 
-
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 - (NSString *)hexDump
 {
     NSMutableString *buf = [NSMutableString string];
-    const unsigned char *bytes = data.bytes;
-    NSUInteger length = data.length;
+    const unsigned char *bytes = _data.bytes;
+    NSUInteger length = _data.length;
     
     for (NSUInteger i = 0; i < length; i += 16)
     {
         if (i + 16 < length)
         {
             [buf appendFormat:@"%08lx %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n",
-             addr + i,
+             _addr + i,
              bytes[i + 0],
              bytes[i + 1],
              bytes[i + 2],
@@ -166,7 +151,7 @@
         {
             NSMutableString *hexBuf = [NSMutableString string];
             NSMutableString *charBuf = [NSMutableString string];
-            [hexBuf appendFormat:@"%08lx ", addr + i];
+            [hexBuf appendFormat:@"%08lx ", _addr + i];
             for (NSUInteger j = 0; j < 16; ++j)
             {
                 if (i + j < length)
