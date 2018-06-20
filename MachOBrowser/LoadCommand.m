@@ -366,6 +366,34 @@ struct local_thread_command {
         return @{@"entryoff": @(entryoff),
                  @"stacksize": @(stacksize)};
     }
+    else if (cmd == LC_DYLD_INFO || cmd == LC_DYLD_INFO_ONLY)
+    {
+        struct dyld_info_command *c = (struct dyld_info_command *)(_data.bytes + _offset);
+        return @{@"rebase_off": @(c->rebase_off),
+                 @"rebase_size": @(c->rebase_size),
+                 @"bind_off": @(c->bind_off),
+                 @"bind_size": @(c->bind_size),
+                 @"weak_bind_off": @(c->weak_bind_off),
+                 @"weak_bind_size": @(c->weak_bind_size),
+                 @"lazy_bind_off": @(c->lazy_bind_off),
+                 @"lazy_bind_size": @(c->lazy_bind_size),
+                 @"export_off": @(c->export_off),
+                 @"export_size": @(c->export_size)};
+    }
+    else if (cmd == LC_VERSION_MIN_MACOSX)
+    {
+        struct version_min_command *c = (struct version_min_command *)(_data.bytes + _offset);
+        NSString *version = [NSString stringWithFormat:@"%d.%d.%d",
+                             c->version >> 16,
+                             (c->version >> 8) & 0xff,
+                             c->version & 0xff];
+        NSString *sdk = [NSString stringWithFormat:@"%d.%d.%d",
+                         c->sdk >> 16,
+                         (c->sdk >> 8) & 0xff,
+                         c->sdk & 0xff];
+        return @{@"version": version,
+                 @"sdk": sdk};
+    }
     return nil;
 }
 
@@ -418,8 +446,9 @@ struct local_thread_command {
         //case LC_REEXPORT_DYLIB:
         //case LC_LAZY_LOAD_DYLIB:
         //case LC_ENCRYPTION_INFO:
-        //case LC_DYLD_INFO:
-        //case LC_DYLD_INFO_ONLY:
+        case LC_DYLD_INFO:
+        case LC_DYLD_INFO_ONLY:
+        case LC_VERSION_MIN_MACOSX:
         case LC_MAIN:
             return YES;
     }
