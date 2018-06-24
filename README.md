@@ -12,17 +12,3 @@ Home: [githib.com/dcsch/macho-browser](https://github.com/dcsch/macho-browser)
 [otool](http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man1/otool.1.html) and
 [nm](http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man1/nm.1.html)
 command-line tools, but utilising the Aqua interface of macOS.
-
-## Changes
-
-### Version 0.9 (3)
-- Added ability to open applications, which will load the executable named in the Info.plist.
-- Added  `LC_RPATH`, `LC_MAIN`, `LC_DYLD_INFO`, `LC_DYLD_INFO_ONLY`, `LC_VERSION_MIN_MACOSX`, `LC_SOURCE_VERSION`,
-  `LC_FUNCTION_STARTS`, `LC_DATA_IN_CODE`.
-
-### Version 0.9 (2)
-- Removed extraneous control highlighting.
-- Malformed load commands are highlighted in red.  (Only for segments so far.)
-
-### Version 0.9 (1)
-- Initial public release.
