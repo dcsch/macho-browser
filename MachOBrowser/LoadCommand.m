@@ -394,6 +394,32 @@ struct local_thread_command {
         return @{@"version": version,
                  @"sdk": sdk};
     }
+    else if (cmd == LC_SOURCE_VERSION)
+    {
+        struct source_version_command *c = (struct source_version_command *)(_data.bytes + _offset);
+        NSString *version = [NSString stringWithFormat:@"%llu.%llu.%llu.%llu.%llu",
+                             c->version >> 40,
+                             (c->version >> 30) & 0x3ff,
+                             (c->version >> 20) & 0x3ff,
+                             (c->version >> 10) & 0x3ff,
+                             c->version & 0x3ff];
+        return @{@"version": version};
+    }
+    else if (cmd == LC_CODE_SIGNATURE || cmd == LC_SEGMENT_SPLIT_INFO ||
+             cmd == LC_FUNCTION_STARTS || cmd == LC_DATA_IN_CODE)
+    {
+        struct linkedit_data_command *c = (struct linkedit_data_command *)(_data.bytes + _offset);
+        if (self.swapBytes)
+        {
+            return @{@"dataoff": @(CFSwapInt32(c->dataoff)),
+                     @"datasize": @(CFSwapInt32(c->datasize))};
+        }
+        else
+        {
+            return @{@"dataoff": @(c->dataoff),
+                     @"datasize": @(c->datasize)};
+        }
+    }
     return nil;
 }
 
@@ -441,8 +467,8 @@ struct local_thread_command {
         //case LC_ROUTINES_64:
         case LC_UUID:
         case LC_RPATH:
-        //case LC_CODE_SIGNATURE:
-        //case LC_SEGMENT_SPLIT_INFO:
+        case LC_CODE_SIGNATURE:
+        case LC_SEGMENT_SPLIT_INFO:
         //case LC_REEXPORT_DYLIB:
         //case LC_LAZY_LOAD_DYLIB:
         //case LC_ENCRYPTION_INFO:
@@ -450,6 +476,9 @@ struct local_thread_command {
         case LC_DYLD_INFO_ONLY:
         case LC_VERSION_MIN_MACOSX:
         case LC_MAIN:
+        case LC_SOURCE_VERSION:
+        case LC_FUNCTION_STARTS:
+        case LC_DATA_IN_CODE:
             return YES;
     }
     return NO;
