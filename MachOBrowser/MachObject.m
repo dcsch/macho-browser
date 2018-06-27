@@ -79,6 +79,9 @@
         case CPU_TYPE_ARM:
             cpuString = @"arm";
             break;
+        case CPU_TYPE_ARM64:
+            cpuString = @"arm64";
+            break;
         case CPU_TYPE_MC88000:
             cpuString = @"mc88000";
             break;

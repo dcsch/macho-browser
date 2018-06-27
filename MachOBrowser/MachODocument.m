@@ -95,17 +95,41 @@
     if (fileWrapper.directory)
     {
         // Dive into the app package and pick out the executable
+        NSFileWrapper *infoFileWrapper;
+        BOOL macOSApp;
         NSFileWrapper *contentsWrapper = fileWrapper.fileWrappers[@"Contents"];
-        NSFileWrapper *infoFileWrapper = contentsWrapper.fileWrappers[@"Info.plist"];
+        if (contentsWrapper)
+        {
+            // This is a macOS application
+            infoFileWrapper = contentsWrapper.fileWrappers[@"Info.plist"];
+            macOSApp = YES;
+        }
+        else
+        {
+            infoFileWrapper = fileWrapper.fileWrappers[@"Info.plist"];
+            macOSApp = NO;
+        }
         NSDictionary<NSString *, id> *infoDict =
         [NSPropertyListSerialization propertyListWithData:infoFileWrapper.regularFileContents
                                                   options:NSPropertyListImmutable
                                                    format:nil
                                                     error:nil];
         NSString *executable = infoDict[(NSString *)kCFBundleExecutableKey];
-        NSFileWrapper *macOSWrapper = contentsWrapper.fileWrappers[@"MacOS"];
-        NSFileWrapper *execFileWrapper = macOSWrapper.fileWrappers[executable];
-        return [self readFromData:execFileWrapper.regularFileContents ofType:typeName error:outError];
+        NSFileWrapper *execFileWrapper;
+        if (macOSApp)
+        {
+            NSFileWrapper *macOSWrapper = contentsWrapper.fileWrappers[@"MacOS"];
+            execFileWrapper = macOSWrapper.fileWrappers[executable];
+        }
+        else
+        {
+            execFileWrapper = fileWrapper.fileWrappers[executable];
+        }
+
+        if (execFileWrapper)
+            return [self readFromData:execFileWrapper.regularFileContents ofType:typeName error:outError];
+        else
+            return NO;
     }
     else
     {

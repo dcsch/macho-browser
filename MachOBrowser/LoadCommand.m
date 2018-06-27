@@ -162,6 +162,10 @@ struct local_thread_command {
             return @"LC_VERSION_MIN_MACOSX";
         case LC_VERSION_MIN_IPHONEOS: /* build for iPhoneOS min OS version */
             return @"LC_VERSION_MIN_IPHONEOS";
+        case LC_VERSION_MIN_WATCHOS:
+            return @"LC_VERSION_MIN_WATCHOS";
+        case LC_VERSION_MIN_TVOS:
+            return @"LC_VERSION_MIN_TVOS";
         case LC_FUNCTION_STARTS: /* compressed table of function start addresses */
             return @"LC_FUNCTION_STARTS";
         case LC_DYLD_ENVIRONMENT: /* string for dyld to treat like environment variable */
@@ -174,6 +178,8 @@ struct local_thread_command {
             return @"LC_SOURCE_VERSION";
         case LC_DYLIB_CODE_SIGN_DRS: /* Code signing DRs copied from linked dylibs */
             return @"LC_DYLIB_CODE_SIGN_DRS";
+        case LC_ENCRYPTION_INFO_64:
+            return @"LC_ENCRYPTION_INFO_64";
     }
     return [NSString stringWithFormat:@"0x%x", cmd];
 }
@@ -380,7 +386,10 @@ struct local_thread_command {
                  @"export_off": @(c->export_off),
                  @"export_size": @(c->export_size)};
     }
-    else if (cmd == LC_VERSION_MIN_MACOSX)
+    else if (cmd == LC_VERSION_MIN_MACOSX ||
+             cmd == LC_VERSION_MIN_IPHONEOS ||
+             cmd == LC_VERSION_MIN_WATCHOS ||
+             cmd == LC_VERSION_MIN_TVOS)
     {
         struct version_min_command *c = (struct version_min_command *)(_data.bytes + _offset);
         NSString *version = [NSString stringWithFormat:@"%d.%d.%d",
@@ -475,6 +484,9 @@ struct local_thread_command {
         case LC_DYLD_INFO:
         case LC_DYLD_INFO_ONLY:
         case LC_VERSION_MIN_MACOSX:
+        case LC_VERSION_MIN_IPHONEOS:
+        case LC_VERSION_MIN_WATCHOS:
+        case LC_VERSION_MIN_TVOS:
         case LC_MAIN:
         case LC_SOURCE_VERSION:
         case LC_FUNCTION_STARTS:
