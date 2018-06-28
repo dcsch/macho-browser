@@ -162,10 +162,6 @@ struct local_thread_command {
             return @"LC_VERSION_MIN_MACOSX";
         case LC_VERSION_MIN_IPHONEOS: /* build for iPhoneOS min OS version */
             return @"LC_VERSION_MIN_IPHONEOS";
-        case LC_VERSION_MIN_WATCHOS:
-            return @"LC_VERSION_MIN_WATCHOS";
-        case LC_VERSION_MIN_TVOS:
-            return @"LC_VERSION_MIN_TVOS";
         case LC_FUNCTION_STARTS: /* compressed table of function start addresses */
             return @"LC_FUNCTION_STARTS";
         case LC_DYLD_ENVIRONMENT: /* string for dyld to treat like environment variable */
@@ -178,8 +174,20 @@ struct local_thread_command {
             return @"LC_SOURCE_VERSION";
         case LC_DYLIB_CODE_SIGN_DRS: /* Code signing DRs copied from linked dylibs */
             return @"LC_DYLIB_CODE_SIGN_DRS";
-        case LC_ENCRYPTION_INFO_64:
+        case LC_ENCRYPTION_INFO_64: /* 64-bit encrypted segment information */
             return @"LC_ENCRYPTION_INFO_64";
+        case LC_LINKER_OPTION: /* linker options in MH_OBJECT files */
+            return @"LC_LINKER_OPTION";
+        case LC_LINKER_OPTIMIZATION_HINT: /* optimization hints in MH_OBJECT files */
+            return @"LC_LINKER_OPTIMIZATION_HINT";
+        case LC_VERSION_MIN_TVOS: /* build for AppleTV min OS version */
+            return @"LC_VERSION_MIN_TVOS";
+        case LC_VERSION_MIN_WATCHOS: /* build for Watch min OS version */
+            return @"LC_VERSION_MIN_WATCHOS";
+        case LC_NOTE: /* arbitrary data included within a Mach-O file */
+            return @"LC_NOTE";
+        case LC_BUILD_VERSION: /* build for platform min OS version */
+            return @"LC_BUILD_VERSION";
     }
     return [NSString stringWithFormat:@"0x%x", cmd];
 }
