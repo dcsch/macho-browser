@@ -437,6 +437,40 @@ struct local_thread_command {
                      @"datasize": @(c->datasize)};
         }
     }
+    else if (cmd == LC_ENCRYPTION_INFO)
+    {
+        struct encryption_info_command *c = (struct encryption_info_command *)(_data.bytes + _offset);
+        if (self.swapBytes)
+        {
+            return @{@"cryptoff": @(CFSwapInt32(c->cryptoff)),
+                     @"cryptsize": @(CFSwapInt32(c->cryptsize)),
+                     @"cryptid": @(CFSwapInt32(c->cryptid))};
+        }
+        else
+        {
+            return @{@"cryptoff": @(c->cryptoff),
+                     @"cryptsize": @(c->cryptsize),
+                     @"cryptid": @(c->cryptid)};
+        }
+    }
+    else if (cmd == LC_ENCRYPTION_INFO_64)
+    {
+        struct encryption_info_command_64 *c = (struct encryption_info_command_64 *)(_data.bytes + _offset);
+        if (self.swapBytes)
+        {
+            return @{@"cryptoff": @(CFSwapInt32(c->cryptoff)),
+                     @"cryptsize": @(CFSwapInt32(c->cryptsize)),
+                     @"cryptid": @(CFSwapInt32(c->cryptid)),
+                     @"pad": @(CFSwapInt32(c->pad))};
+        }
+        else
+        {
+            return @{@"cryptoff": @(c->cryptoff),
+                     @"cryptsize": @(c->cryptsize),
+                     @"cryptid": @(c->cryptid),
+                     @"pad": @(c->pad)};
+        }
+    }
     return nil;
 }
 
@@ -488,7 +522,7 @@ struct local_thread_command {
         case LC_SEGMENT_SPLIT_INFO:
         //case LC_REEXPORT_DYLIB:
         //case LC_LAZY_LOAD_DYLIB:
-        //case LC_ENCRYPTION_INFO:
+        case LC_ENCRYPTION_INFO:
         case LC_DYLD_INFO:
         case LC_DYLD_INFO_ONLY:
         case LC_VERSION_MIN_MACOSX:
@@ -499,6 +533,7 @@ struct local_thread_command {
         case LC_SOURCE_VERSION:
         case LC_FUNCTION_STARTS:
         case LC_DATA_IN_CODE:
+        case LC_ENCRYPTION_INFO_64:
             return YES;
     }
     return NO;
