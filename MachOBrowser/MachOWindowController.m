@@ -22,12 +22,11 @@
 
 @interface MachOWindowController () <NSTableViewDelegate>
 {
-    IBOutlet NSView *placeHolderView;
+    IBOutlet NSTabView *tabView;
     IBOutlet NSArrayController *arrayController;
     IBOutlet NSArrayController *archArrayController;
     IBOutlet NSTableView *tableView;
 
-    NSView *currentView;
     NSViewController *simpleListViewController;
     SegmentViewController *segmentViewController;
     SymbolTableViewController *symbolTableViewController;
@@ -36,8 +35,8 @@
 
 - (IBAction)selectArch:(id)sender;
 
-- (void)switchToView:(NSView *)newView;
-- (void)removeSubview;
+- (void)addView:(NSView *)newView label:(NSString *)label;
+- (void)removeViews;
 
 @end
 
@@ -65,6 +64,8 @@
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
+    [self removeViews];
+
     if (arrayController.selectedObjects.count > 0)
     {
         LoadCommand *loadCommand = (arrayController.selectedObjects)[0];
@@ -73,29 +74,30 @@
         {
             // Choose which view we're going to use for this load command
             NSViewController *loadCommandViewController;
+            NSString *label;
             if (loadCommand.command == LC_SEGMENT || loadCommand.command == LC_SEGMENT_64)
+            {
                 loadCommandViewController = segmentViewController;
+                label = @"Segment";
+            }
             else if (loadCommand.command == LC_SYMTAB)
+            {
                 loadCommandViewController = symbolTableViewController;
+                label = @"Symbols";
+            }
             else
+            {
                 loadCommandViewController = simpleListViewController;
+                label = @"Name-Value";
+            }
             
             // Set the load command as the represented object and make the switch
             loadCommandViewController.representedObject = loadCommand;
-            [self switchToView:loadCommandViewController.view];
+            [self addView:loadCommandViewController.view label:label];
         }
-        else
-        {
-            //[self removeSubview];
-            hexDumpViewController.representedObject = loadCommand;
-            if (currentView == hexDumpViewController.view)
-                [hexDumpViewController.dumpTableView reloadData];
-            else
-                [self switchToView:hexDumpViewController.view];
-        }
+        hexDumpViewController.representedObject = loadCommand;
+        [self addView:hexDumpViewController.view label:@"Hex"];
     }
-    else
-        [self removeSubview];
 }
 
 #pragma mark - NSSplitViewDelegate Methods
@@ -157,38 +159,21 @@
 
 #pragma mark - Private Methods
 
-- (void)switchToView:(NSView *)newView
+- (void)addView:(NSView *)newView label:(NSString *)label
 {
-    if (newView != currentView)
-    {
-        [self removeSubview];
-        [placeHolderView addSubview:newView];
-        currentView = newView;
-        
-        NSRect newBounds;
-        newBounds.origin.x = 0;
-        newBounds.origin.y = 0;
-        newBounds.size.width = currentView.superview.frame.size.width;
-        newBounds.size.height = currentView.superview.frame.size.height;
-        currentView.frame = currentView.superview.frame;
-        
-        // make sure our added subview is placed and resizes correctly
-        [currentView setFrameOrigin:NSMakePoint(0,0)];
-        currentView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-    }
+    NSTabViewItem *item = [[NSTabViewItem alloc] initWithIdentifier:nil];
+    item.label = label;
+    item.view = newView;
+    [tabView addTabViewItem:item];
 }
 
-- (void)removeSubview
+- (void)removeViews
 {
-    // empty selection
-    NSArray *subViews = placeHolderView.subviews;
-    if (subViews.count > 0)
+    for (NSTabViewItem *item in tabView.tabViewItems)
     {
-        [subViews[0] removeFromSuperview];
+        [tabView removeTabViewItem:item];
     }
-    currentView = nil;
-    
-    [placeHolderView displayIfNeeded];    // we want the removed views to disappear right away
+    [tabView displayIfNeeded];    // we want the removed views to disappear right away
 }
 
 @end
