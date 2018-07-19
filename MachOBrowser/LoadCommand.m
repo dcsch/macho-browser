@@ -471,6 +471,19 @@ struct local_thread_command {
                      @"pad": @(c->pad)};
         }
     }
+    else if (cmd == LC_LINKER_OPTION)
+    {
+        struct linker_option_command *c = (struct linker_option_command *)(_data.bytes + _offset);
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        const char *ptr = (char *)c + sizeof(struct linker_option_command);
+        for (uint32_t i = 0; i < c->count; ++i)
+        {
+            size_t len = strlen(ptr);
+            dict[[NSString stringWithFormat:@"%u", i]] = [NSString stringWithUTF8String:ptr];
+            ptr += len + 1;
+        }
+        return dict;
+    }
     return nil;
 }
 
@@ -534,6 +547,7 @@ struct local_thread_command {
         case LC_FUNCTION_STARTS:
         case LC_DATA_IN_CODE:
         case LC_ENCRYPTION_INFO_64:
+        case LC_LINKER_OPTION:
             return YES;
     }
     return NO;

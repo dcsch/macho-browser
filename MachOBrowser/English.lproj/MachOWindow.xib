@@ -89,20 +89,6 @@
                                 <rect key="frame" x="184" y="-6" width="428" height="395"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <font key="font" metaFont="system"/>
-                                <tabViewItems>
-                                    <tabViewItem label="Tab" identifier="" id="m44-8e-n3s">
-                                        <view key="view" id="O0B-cS-I85">
-                                            <rect key="frame" x="10" y="33" width="408" height="349"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="View" identifier="" id="mVv-gN-F2U">
-                                        <view key="view" id="ojZ-sd-AcT">
-                                            <rect key="frame" x="10" y="33" width="408" height="349"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                </tabViewItems>
                             </tabView>
                         </subviews>
                         <holdingPriorities>
