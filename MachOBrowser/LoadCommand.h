@@ -31,10 +31,10 @@
 
 @property(nonnull, readonly) NSData *commandData;
 
-- (instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)init __attribute__((unavailable));
+- (nonnull instancetype)init __attribute__((unavailable));
 
-+ (instancetype)loadCommandWithData:(nonnull NSData *)data offset:(NSUInteger)offset;
++ (nonnull instancetype)loadCommandWithData:(nonnull NSData *)data offset:(NSUInteger)offset;
 
 @end
