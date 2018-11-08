@@ -26,7 +26,7 @@
     if (number.boolValue == YES)
         return [NSColor redColor];
     else
-        return [NSColor blackColor];
+        return [NSColor controlTextColor];
 }
 
 @end
