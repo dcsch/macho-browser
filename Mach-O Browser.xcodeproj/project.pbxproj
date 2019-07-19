@@ -51,14 +51,18 @@
 		0337168B20D92B5500855E20 /* MachOBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MachOBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0337168D20D92B5500855E20 /* MachOBrowserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MachOBrowserTests.m; sourceTree = "<group>"; };
 		0337168F20D92B5500855E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03AD9EC722E1A36C0081F342 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03AD9EC822E1A36D0081F342 /* en */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en; path = "en.lproj/Mach-O Browser Help"; sourceTree = "<group>"; };
+		03AD9ECE22E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SegmentView.xib; sourceTree = "<group>"; };
+		03AD9ECF22E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MachOWindow.xib; sourceTree = "<group>"; };
+		03AD9ED022E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		03AD9ED122E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SimpleListView.xib; sourceTree = "<group>"; };
+		03AD9ED222E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SymbolTableView.xib; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		1DDD582B0DA1D0D100B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2564AD2C0F5327BB00F57823 /* Mach_O_Browser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mach_O_Browser_Prefix.pch; sourceTree = "<group>"; };
 		2A37F4ACFDCFA73011CA2CEA /* MachODocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachODocument.m; sourceTree = "<group>"; };
 		2A37F4AEFDCFA73011CA2CEA /* MachODocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachODocument.h; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		63232CBA109D0C7E0011A93E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SymbolTableView.xib; sourceTree = "<group>"; };
 		63232CBF109D0CBA0011A93E /* SymbolTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolTableViewController.h; sourceTree = "<group>"; };
 		63232CC0109D0CBA0011A93E /* SymbolTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolTableViewController.m; sourceTree = "<group>"; };
 		63232CCD109D112A0011A93E /* SegmentLoadCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentLoadCommand.h; sourceTree = "<group>"; };
@@ -69,7 +73,6 @@
 		6338E04918066C47005A3263 /* HexDumpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexDumpViewController.m; sourceTree = "<group>"; };
 		6338E04A18066C47005A3263 /* HexDumpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HexDumpView.xib; sourceTree = "<group>"; };
 		6356E2F510B63BE600D45B60 /* gear.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = gear.icns; sourceTree = "<group>"; };
-		636E5DDA10A27A130061B1E7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SegmentView.xib; sourceTree = "<group>"; };
 		636E5E6110A2AEE30061B1E7 /* HexFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexFormatter.h; sourceTree = "<group>"; };
 		636E5E6210A2AEE30061B1E7 /* HexFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexFormatter.m; sourceTree = "<group>"; };
 		636E5E7A10A2B0280061B1E7 /* SegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentViewController.h; sourceTree = "<group>"; };
@@ -80,9 +83,6 @@
 		636E5F6D10A3AE9C0061B1E7 /* SymbolTableLoadCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolTableLoadCommand.m; sourceTree = "<group>"; };
 		636E5FCB10A3CDD00061B1E7 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
 		636E5FCC10A3CDD00061B1E7 /* Symbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Symbol.m; sourceTree = "<group>"; };
-		636EB3E710B39E4C00D014A0 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/Mach-O Browser Help"; sourceTree = "<group>"; };
-		638A4B9F109AC16300DE619A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SimpleListView.xib; sourceTree = "<group>"; };
-		63E8C87610990BDA001EA96D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MachOWindow.xib; sourceTree = "<group>"; };
 		63E8C87A10990CD7001EA96D /* MachOWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachOWindowController.h; sourceTree = "<group>"; };
 		63E8C87B10990CD7001EA96D /* MachOWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachOWindowController.m; sourceTree = "<group>"; };
 		63E8C8F4109911BB001EA96D /* MachObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MachObject.h; sourceTree = "<group>"; };
@@ -266,10 +266,11 @@
 			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Mach-O Browser" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Mach-O Browser */;
 			projectDirPath = "";
@@ -353,7 +354,7 @@
 		089C165FFE840EACC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C1660FE840EACC02AAC07 /* English */,
+				03AD9EC722E1A36C0081F342 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -361,7 +362,7 @@
 		1DDD582A0DA1D0D100B32029 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1DDD582B0DA1D0D100B32029 /* English */,
+				03AD9ED022E1A3760081F342 /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -369,7 +370,7 @@
 		63232CBD109D0C850011A93E /* SymbolTableView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				63232CBA109D0C7E0011A93E /* English */,
+				03AD9ED222E1A3760081F342 /* Base */,
 			);
 			name = SymbolTableView.xib;
 			sourceTree = "<group>";
@@ -377,7 +378,7 @@
 		636E5DD910A27A130061B1E7 /* SegmentView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				636E5DDA10A27A130061B1E7 /* English */,
+				03AD9ECE22E1A3760081F342 /* Base */,
 			);
 			name = SegmentView.xib;
 			sourceTree = "<group>";
@@ -385,7 +386,7 @@
 		636EB3E610B39E4C00D014A0 /* Mach-O Browser Help */ = {
 			isa = PBXVariantGroup;
 			children = (
-				636EB3E710B39E4C00D014A0 /* English */,
+				03AD9EC822E1A36D0081F342 /* en */,
 			);
 			name = "Mach-O Browser Help";
 			sourceTree = "<group>";
@@ -393,7 +394,7 @@
 		638A4BA1109AC16B00DE619A /* SimpleListView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				638A4B9F109AC16300DE619A /* English */,
+				03AD9ED122E1A3760081F342 /* Base */,
 			);
 			name = SimpleListView.xib;
 			sourceTree = "<group>";
@@ -401,7 +402,7 @@
 		63E8C87510990BDA001EA96D /* MachOWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				63E8C87610990BDA001EA96D /* English */,
+				03AD9ECF22E1A3760081F342 /* Base */,
 			);
 			name = MachOWindow.xib;
 			sourceTree = "<group>";
