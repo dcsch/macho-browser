@@ -14,39 +14,30 @@
 
 @end
 
-
 @implementation HexFormatter
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self)
-    {
-    }
-    return self;
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+  }
+  return self;
 }
 
-
-- (NSString *)stringForObjectValue:(id)obj
-{
-    if ([obj isKindOfClass:[NSString class]])
-    {
-        return [NSString stringWithFormat:@"0x%@", obj];
-    }
-    else if ([obj isKindOfClass:[NSNumber class]])
-    {
-        NSNumber *number = obj;
-        return [NSString stringWithFormat:@"0x%08x", number.intValue];
-    }
-    return nil;
+- (NSString *)stringForObjectValue:(id)obj {
+  if ([obj isKindOfClass:[NSString class]]) {
+    return [NSString stringWithFormat:@"0x%@", obj];
+  } else if ([obj isKindOfClass:[NSNumber class]]) {
+    NSNumber *number = obj;
+    return [NSString stringWithFormat:@"0x%08x", number.intValue];
+  }
+  return nil;
 }
 
 - (BOOL)getObjectValue:(id *)obj
              forString:(NSString *)string
-      errorDescription:(NSString **)errorString
-{
-//    *obj = [self numberFromHexString:string];
-    return (*obj) ? YES : NO;
+      errorDescription:(NSString **)errorString {
+  //    *obj = [self numberFromHexString:string];
+  return (*obj) ? YES : NO;
 }
 
 /*
@@ -57,7 +48,7 @@
     NSString *hexString = [string substringWithRange:range];
     if (!hexString)
         return nil;
-    
+
     // Calculate the value
     NSUInteger value = 0;
     NSUInteger factor = 1;

@@ -8,17 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface SegmentViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
-{
-    IBOutlet NSTextField *vmaddrTextField;
-    IBOutlet NSTextField *vmsizeTextField;
-    IBOutlet NSTextField *maxprotTextField;
-    IBOutlet NSTextField *initprotTextField;
-    IBOutlet NSTextField *flagsTextField;
-    IBOutlet NSTableView *tableView;
-    IBOutlet NSArrayController *arrayController;
-    IBOutlet NSTableView *dumpTableView;
+@interface SegmentViewController
+    : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
+  IBOutlet NSTextField *vmaddrTextField;
+  IBOutlet NSTextField *vmsizeTextField;
+  IBOutlet NSTextField *maxprotTextField;
+  IBOutlet NSTextField *initprotTextField;
+  IBOutlet NSTextField *flagsTextField;
+  IBOutlet NSTableView *tableView;
+  IBOutlet NSArrayController *arrayController;
+  IBOutlet NSTableView *dumpTableView;
 }
 
 @end

@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface ErrorColorValueTransformer : NSValueTransformer
 
 @end

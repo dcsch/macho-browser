@@ -8,10 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface SymbolTableViewController : NSViewController
-{
-
+@interface SymbolTableViewController : NSViewController {
 }
 
 @end

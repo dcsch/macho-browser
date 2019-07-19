@@ -6,7 +6,6 @@
 //  Copyright 2009 David Schweinsberg. All rights reserved.
 //
 
-
 #import <Cocoa/Cocoa.h>
 
 @interface MachODocument : NSDocument

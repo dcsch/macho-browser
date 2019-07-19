@@ -25,9 +25,13 @@
 @property(strong, readonly) NSData *data;
 @property(copy, readonly) NSString *hexDump;
 
-- (instancetype)initWithSect:(struct section*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSect:(struct section *)aSect
+                        data:(NSData *)aData
+                   swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithSect64:(struct section_64*)aSect data:(NSData *)aData swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSect64:(struct section_64 *)aSect
+                          data:(NSData *)aData
+                     swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init __attribute__((unavailable));
 

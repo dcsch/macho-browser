@@ -8,10 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface AlignmentFormatter : NSFormatter
-{
-
+@interface AlignmentFormatter : NSFormatter {
 }
 
 @end

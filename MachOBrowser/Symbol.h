@@ -18,12 +18,12 @@
 @property(readonly) uint64_t value;
 
 - (instancetype)initWithNlist:(struct nlist *)symbolEntry
-        stringTable:(const char *)stringTable
-          swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
+                  stringTable:(const char *)stringTable
+                    swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithNlist64:(struct nlist_64 *)symbolEntry
-          stringTable:(const char *)stringTable
-            swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
+                    stringTable:(const char *)stringTable
+                      swapBytes:(BOOL)swapBytes NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init __attribute__((unavailable));
 

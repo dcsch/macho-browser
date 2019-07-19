@@ -10,23 +10,20 @@
 
 @implementation ErrorColorValueTransformer
 
-+ (Class)transformedValueClass
-{
-    return [NSColor class];
++ (Class)transformedValueClass {
+  return [NSColor class];
 }
 
-+ (BOOL)allowsReverseTransformation
-{
-    return NO;
++ (BOOL)allowsReverseTransformation {
+  return NO;
 }
 
-- (id)transformedValue:(id)value
-{
-    NSNumber *number = value;
-    if (number.boolValue == YES)
-        return [NSColor redColor];
-    else
-        return [NSColor controlTextColor];
+- (id)transformedValue:(id)value {
+  NSNumber *number = value;
+  if (number.boolValue == YES)
+    return [NSColor redColor];
+  else
+    return [NSColor controlTextColor];
 }
 
 @end

@@ -8,9 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface HexFormatter : NSFormatter
-{
+@interface HexFormatter : NSFormatter {
 }
 
 @end

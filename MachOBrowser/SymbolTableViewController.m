@@ -8,7 +8,6 @@
 
 #import "SymbolTableViewController.h"
 
-
 @implementation SymbolTableViewController
 
 @end

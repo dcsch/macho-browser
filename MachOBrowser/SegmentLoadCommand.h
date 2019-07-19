@@ -6,8 +6,8 @@
 //  Copyright 2009 David Schweinsberg. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import "LoadCommand.h"
+#import <Cocoa/Cocoa.h>
 
 @interface SegmentLoadCommand : LoadCommand
 

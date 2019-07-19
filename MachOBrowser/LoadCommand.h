@@ -8,11 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface LoadCommand : NSObject
-{
-    NSData *_data;
-    NSUInteger _offset;
-    BOOL _malformed;
+@interface LoadCommand : NSObject {
+  NSData *_data;
+  NSUInteger _offset;
+  BOOL _malformed;
 }
 
 @property(readonly) uint32_t command;
@@ -31,10 +30,13 @@
 
 @property(nonnull, readonly) NSData *commandData;
 
-- (nonnull instancetype)initWithData:(nonnull NSData *)aData offset:(NSUInteger)anOffset NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithData:(nonnull NSData *)aData
+                              offset:(NSUInteger)anOffset
+    NS_DESIGNATED_INITIALIZER;
 
 - (nonnull instancetype)init __attribute__((unavailable));
 
-+ (nonnull instancetype)loadCommandWithData:(nonnull NSData *)data offset:(NSUInteger)offset;
++ (nonnull instancetype)loadCommandWithData:(nonnull NSData *)data
+                                     offset:(NSUInteger)offset;
 
 @end
