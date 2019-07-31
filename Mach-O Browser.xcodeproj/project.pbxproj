@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032B87B520D46BCF000200B7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 032B87B420D46BCE000200B7 /* README.md */; };
 		0337168E20D92B5500855E20 /* MachOBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0337168D20D92B5500855E20 /* MachOBrowserTests.m */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		63232CBE109D0C850011A93E /* SymbolTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63232CBD109D0C850011A93E /* SymbolTableView.xib */; };
@@ -58,6 +57,7 @@
 		03AD9ED022E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		03AD9ED122E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SimpleListView.xib; sourceTree = "<group>"; };
 		03AD9ED222E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SymbolTableView.xib; sourceTree = "<group>"; };
+		03F4DE2C22F144B00099EE64 /* Mach-O Browser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mach-O Browser.entitlements"; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2564AD2C0F5327BB00F57823 /* Mach_O_Browser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mach_O_Browser_Prefix.pch; sourceTree = "<group>"; };
 		2A37F4ACFDCFA73011CA2CEA /* MachODocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachODocument.m; sourceTree = "<group>"; };
@@ -155,6 +155,7 @@
 		032B87B020D44285000200B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03F4DE2C22F144B00099EE64 /* Mach-O Browser.entitlements */,
 				6356E2F510B63BE600D45B60 /* gear.icns */,
 				8D15AC360486D014006FF6A4 /* Mach_O_Browser-Info.plist */,
 				6338E04A18066C47005A3263 /* HexDumpView.xib */,
@@ -262,6 +263,13 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8D15AC270486D014006FF6A4;
 					};
+					8D15AC270486D014006FF6A4 = {
+						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = C05733CB08A9546B00998B17 /* Build configuration list for PBXProject "Mach-O Browser" */;
@@ -296,7 +304,6 @@
 			files = (
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				6338E04C18066C47005A3263 /* HexDumpView.xib in Resources */,
-				032B87B520D46BCF000200B7 /* README.md in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
 				63E8C87710990BDA001EA96D /* MachOWindow.xib in Resources */,
 				638A4BA2109AC16B00DE619A /* SimpleListView.xib in Resources */,
@@ -499,9 +506,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "";
+				DEVELOPMENT_TEAM = 9MWCHY26A8;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -511,6 +522,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.synchroma.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Mach-O Browser";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "";
 			};
 			name = Debug;
@@ -520,9 +532,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9MWCHY26A8;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MachOBrowser/Mach_O_Browser_Prefix.pch;
@@ -530,6 +546,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.synchroma.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Mach-O Browser";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "";
 			};
 			name = Release;
@@ -565,7 +582,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -600,7 +617,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 			};
 			name = Release;
