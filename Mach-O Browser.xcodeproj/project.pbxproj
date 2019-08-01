@@ -16,7 +16,6 @@
 		63232CF2109D13DD0011A93E /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = 63232CF1109D13DD0011A93E /* Section.m */; };
 		6338E04B18066C47005A3263 /* HexDumpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338E04918066C47005A3263 /* HexDumpViewController.m */; };
 		6338E04C18066C47005A3263 /* HexDumpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6338E04A18066C47005A3263 /* HexDumpView.xib */; };
-		6356E2F610B63BE600D45B60 /* gear.icns in Resources */ = {isa = PBXBuildFile; fileRef = 6356E2F510B63BE600D45B60 /* gear.icns */; };
 		636E5DDB10A27A130061B1E7 /* SegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 636E5DD910A27A130061B1E7 /* SegmentView.xib */; };
 		636E5E6310A2AEE30061B1E7 /* HexFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 636E5E6210A2AEE30061B1E7 /* HexFormatter.m */; };
 		636E5E7C10A2B0280061B1E7 /* SegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 636E5E7B10A2B0280061B1E7 /* SegmentViewController.m */; };
@@ -74,7 +73,6 @@
 		6338E04818066C47005A3263 /* HexDumpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexDumpViewController.h; sourceTree = "<group>"; };
 		6338E04918066C47005A3263 /* HexDumpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexDumpViewController.m; sourceTree = "<group>"; };
 		6338E04A18066C47005A3263 /* HexDumpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HexDumpView.xib; sourceTree = "<group>"; };
-		6356E2F510B63BE600D45B60 /* gear.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = gear.icns; sourceTree = "<group>"; };
 		636E5E6110A2AEE30061B1E7 /* HexFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexFormatter.h; sourceTree = "<group>"; };
 		636E5E6210A2AEE30061B1E7 /* HexFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexFormatter.m; sourceTree = "<group>"; };
 		636E5E7A10A2B0280061B1E7 /* SegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentViewController.h; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 			children = (
 				03F4DE2D22F14A260099EE64 /* Images.xcassets */,
 				03F4DE2C22F144B00099EE64 /* Mach-O Browser.entitlements */,
-				6356E2F510B63BE600D45B60 /* gear.icns */,
 				8D15AC360486D014006FF6A4 /* Mach_O_Browser-Info.plist */,
 				6338E04A18066C47005A3263 /* HexDumpView.xib */,
 				636EB3E610B39E4C00D014A0 /* Mach-O Browser Help */,
@@ -314,7 +311,6 @@
 				63232CBE109D0C850011A93E /* SymbolTableView.xib in Resources */,
 				636E5DDB10A27A130061B1E7 /* SegmentView.xib in Resources */,
 				636EB3F110B39E4C00D014A0 /* Mach-O Browser Help in Resources */,
-				6356E2F610B63BE600D45B60 /* gear.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
