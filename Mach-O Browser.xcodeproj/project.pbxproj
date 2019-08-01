@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0337168E20D92B5500855E20 /* MachOBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0337168D20D92B5500855E20 /* MachOBrowserTests.m */; };
+		03F4DE2E22F14A260099EE64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F4DE2D22F14A260099EE64 /* Images.xcassets */; };
 		1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD582A0DA1D0D100B32029 /* MainMenu.xib */; };
 		63232CBE109D0C850011A93E /* SymbolTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63232CBD109D0C850011A93E /* SymbolTableView.xib */; };
 		63232CC1109D0CBA0011A93E /* SymbolTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63232CC0109D0CBA0011A93E /* SymbolTableViewController.m */; };
@@ -58,6 +59,7 @@
 		03AD9ED122E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SimpleListView.xib; sourceTree = "<group>"; };
 		03AD9ED222E1A3760081F342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SymbolTableView.xib; sourceTree = "<group>"; };
 		03F4DE2C22F144B00099EE64 /* Mach-O Browser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mach-O Browser.entitlements"; sourceTree = "<group>"; };
+		03F4DE2D22F14A260099EE64 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		2564AD2C0F5327BB00F57823 /* Mach_O_Browser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mach_O_Browser_Prefix.pch; sourceTree = "<group>"; };
 		2A37F4ACFDCFA73011CA2CEA /* MachODocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MachODocument.m; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		032B87B020D44285000200B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03F4DE2D22F14A260099EE64 /* Images.xcassets */,
 				03F4DE2C22F144B00099EE64 /* Mach-O Browser.entitlements */,
 				6356E2F510B63BE600D45B60 /* gear.icns */,
 				8D15AC360486D014006FF6A4 /* Mach_O_Browser-Info.plist */,
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
+				03F4DE2E22F14A260099EE64 /* Images.xcassets in Resources */,
 				6338E04C18066C47005A3263 /* HexDumpView.xib in Resources */,
 				1DDD582D0DA1D0D100B32029 /* MainMenu.xib in Resources */,
 				63E8C87710990BDA001EA96D /* MachOWindow.xib in Resources */,
@@ -505,6 +509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -531,6 +536,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
