@@ -177,6 +177,12 @@ struct local_thread_command {
     return @"LC_NOTE";
   case LC_BUILD_VERSION: /* build for platform min OS version */
     return @"LC_BUILD_VERSION";
+  case LC_DYLD_EXPORTS_TRIE: /* used with linkedit_data_command, payload is trie */
+    return @"LC_DYLD_EXPORTS_TRIE";
+  case LC_DYLD_CHAINED_FIXUPS: /* used with linkedit_data_command */
+    return @"LC_DYLD_CHAINED_FIXUPS";
+  case LC_FILESET_ENTRY: /* used with fileset_entry_command */
+    return @"LC_FILESET_ENTRY";
   }
   return [NSString stringWithFormat:@"0x%x", cmd];
 }
@@ -448,6 +454,34 @@ struct local_thread_command {
       ptr += len + 1;
     }
     return dict;
+  } else if (cmd == LC_BUILD_VERSION) {
+    const NSArray<NSString *> *platform = @[
+      @"0",
+      @"PLATFORM_MACOS",
+      @"PLATFORM_IOS",
+      @"PLATFORM_TVOS",
+      @"PLATFORM_WATCHOS",
+      @"PLATFORM_BRIDGEOS",
+      @"PLATFORM_MACCATALYST",
+      @"PLATFORM_IOSSIMULATOR",
+      @"PLATFORM_TVOSSIMULATOR",
+      @"PLATFORM_WATCHOSSIMULATOR",
+      @"PLATFORM_DRIVERKIT"
+    ];
+    struct build_version_command *c =
+        (struct build_version_command *)(_data.bytes + _offset);
+    NSString *minos = [NSString
+        stringWithFormat:@"%u.%u.%u", c->minos >> 16,
+                         (c->minos >> 8) & 0xff, c->minos & 0xff];
+    NSString *sdk = [NSString
+        stringWithFormat:@"%u.%u.%u", c->sdk >> 16,
+                         (c->sdk >> 8) & 0xff, c->sdk & 0xff];
+    return @{
+      @"platform" : c->platform < 11 ? platform[c->platform] : @(c->platform),
+      @"minos" : minos,
+      @"sdk" : sdk,
+      @"ntools" : @(c->ntools)
+    };
   }
   return nil;
 }
@@ -510,6 +544,12 @@ struct local_thread_command {
   case LC_DATA_IN_CODE:
   case LC_ENCRYPTION_INFO_64:
   case LC_LINKER_OPTION:
+//  case LC_LINKER_OPTIMIZATION_HINT:
+//  case LC_NOTE:
+  case LC_BUILD_VERSION:
+//  case LC_DYLD_EXPORTS_TRIE:
+//  case LC_DYLD_CHAINED_FIXUPS:
+//  case LC_FILESET_ENTRY:
     return YES;
   }
   return NO;
